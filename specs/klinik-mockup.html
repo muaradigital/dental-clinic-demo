@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klinik Gigi Arunika — Mockup Website</title>
+<meta name="description" content="Mockup website klinik gigi multi-cabang dengan booking lewat WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5ef; --surface:#ffffff; --ink:#0f2a2e; --muted:#5b7074;
+  --teal:#0f766e; --teal-2:#14b8a6; --mint:#d8f3ec; --sand:#efe9dc; --line:#e3e0d5;
+  --wa:#1faa59; --radius:22px; --shadow:0 18px 50px -20px rgba(15,60,60,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.15;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+section{padding:96px 0}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--teal-2);border-radius:2px}
+.h2{font-size:clamp(1.9rem,3.6vw,2.9rem);margin:12px 0 14px}
+.lead{color:var(--muted);max-width:60ch}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;font-weight:600;font-size:.88rem;line-height:1.2;white-space:nowrap;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,background .3s;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+.btn:hover svg{transform:translateX(3px)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 12px 28px -10px rgba(31,170,89,.6)}
+.btn-wa:hover{box-shadow:0 18px 34px -10px rgba(31,170,89,.7)}
+.btn-ghost{border:1.5px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-dark{background:var(--ink);color:#fff}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.btn:hover::after{transform:translateX(120%)}
+
+/* nav */
+header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .4s}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:74px;margin-top:10px;padding:0 22px;border-radius:999px;transition:all .4s}
+header.nav.scrolled .nav-in{background:rgba(255,255,255,.78);backdrop-filter:blur(16px);box-shadow:0 10px 40px -16px rgba(15,60,60,.3);border:1px solid rgba(255,255,255,.6)}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600}
+.logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--teal),var(--teal-2));display:grid;place-items:center}
+.logo small{display:block;font-family:'Plus Jakarta Sans';font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:-4px}
+nav.links{display:flex;gap:4px}
+nav.links a{padding:9px 15px;border-radius:999px;font-size:.9rem;font-weight:500;color:var(--muted);transition:.25s}
+nav.links a:hover,nav.links a.active{color:var(--ink);background:var(--mint)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;background:var(--mint)}
+.burger span{display:block;width:18px;height:2px;background:var(--ink);margin:4px auto;transition:.3s}
+@media(max-width:900px){
+  .burger{display:block}
+  .nav-cta{display:none}
+  nav.links{position:fixed;inset:90px 20px auto 20px;flex-direction:column;background:#fff;padding:14px;border-radius:24px;box-shadow:var(--shadow);transform:translateY(-14px) scale(.98);opacity:0;pointer-events:none;transition:.35s}
+  nav.links.open{transform:none;opacity:1;pointer-events:auto}
+  nav.links a{padding:13px 16px}
+}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;overflow:hidden}
+.hero>.wrap{width:min(1160px,100% - 40px)}
+.cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.cue i{width:22px;height:36px;border:1.5px solid var(--teal);border-radius:12px;position:relative}
+.cue i::after{content:"";position:absolute;top:6px;left:50%;width:3px;height:7px;margin-left:-1.5px;border-radius:3px;background:var(--teal-2);animation:wheel 1.8s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+@media(max-width:900px){.hero{padding:120px 0 90px}.cue{display:none}}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0;animation:drift 18s ease-in-out infinite alternate}
+.blob.b1{width:460px;height:460px;background:#bdeee2;top:-120px;right:-100px}
+.blob.b2{width:360px;height:360px;background:#f4e6c8;bottom:-120px;left:-80px;animation-delay:-6s}
+.blob.b3{width:260px;height:260px;background:#cfe7ff;top:35%;left:38%;opacity:.35;animation-delay:-11s}
+@keyframes drift{to{transform:translate(40px,30px) scale(1.12)}}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.4rem);margin:18px 0 20px}
+.hero h1 em{font-style:italic;color:var(--teal);position:relative;white-space:nowrap}
+.hero h1 em svg{position:absolute;left:0;bottom:-8px;width:100%;height:12px;overflow:visible}
+.hero h1 em path{stroke:var(--teal-2);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1.4s .8s forwards ease}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 34px}
+.facts{display:flex;flex-wrap:wrap;gap:12px}
+.fact{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1px solid var(--line);padding:10px 16px;border-radius:16px;font-size:.88rem}
+.fact b{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--teal)}
+.hero-art{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.ring{position:absolute;border-radius:50%;border:1.5px dashed rgba(15,118,110,.35);animation:spin 40s linear infinite}
+.ring.r1{inset:4%}.ring.r2{inset:18%;animation-direction:reverse;animation-duration:30s}
+.ring::after{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--teal-2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tooth{width:58%;filter:drop-shadow(0 30px 40px rgba(15,118,110,.28));animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-18px) rotate(2deg)}}
+.spark{position:absolute;color:var(--teal-2);animation:twinkle 3s ease-in-out infinite}
+.spark:nth-of-type(1){top:14%;right:16%}.spark:nth-of-type(2){bottom:20%;left:10%;animation-delay:-1s}.spark:nth-of-type(3){top:40%;left:4%;animation-delay:-2s;scale:.7}
+@keyframes twinkle{50%{transform:scale(1.5) rotate(45deg);opacity:.4}}
+.chip{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);font-size:.82rem;display:flex;gap:10px;align-items:center;animation:float 7s ease-in-out infinite}
+.chip .dot{width:10px;height:10px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 0 rgba(31,170,89,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(31,170,89,0)}100%{box-shadow:0 0 0 0 rgba(31,170,89,0)}}
+.chip.c1{top:10%;left:-2%}.chip.c2{bottom:12%;right:-2%;animation-delay:-3s}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-art{max-width:380px;margin:auto}.chip.c1{left:0}.chip.c2{right:0}}
+
+/* marquee */
+.marquee{background:var(--ink);color:#cfe9e4;padding:18px 0;overflow:hidden;white-space:nowrap}
+.marquee div{display:inline-flex;gap:46px;animation:scroll 32s linear infinite;font-family:'Fraunces',serif;font-size:1.25rem}
+.marquee span::after{content:"✦";margin-left:46px;color:var(--teal-2)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* cards */
+.grid{display:grid;gap:22px}
+.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:980px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g3,.g4,.g2{grid-template-columns:1fr}section{padding:70px 0}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:#bfe6dc}
+.card .ico{width:54px;height:54px;border-radius:16px;background:var(--mint);display:grid;place-items:center;margin-bottom:18px;transition:.4s}
+.card:hover .ico{background:var(--teal);transform:rotate(-8deg) scale(1.06)}
+.card:hover .ico svg{stroke:#fff}
+.ico svg{stroke:var(--teal);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;width:26px;height:26px;transition:.3s}
+.card h3{font-size:1.3rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.93rem}
+.tag{display:inline-block;font-size:.74rem;font-weight:600;padding:4px 11px;border-radius:999px;background:var(--sand);margin:12px 6px 0 0}
+.more{display:inline-flex;gap:8px;align-items:center;margin-top:16px;font-weight:600;font-size:.9rem;color:var(--teal)}
+.more svg{width:16px;transition:.3s}.card:hover .more svg{transform:translateX(6px)}
+
+/* branch card */
+.bcard{padding:0}
+.bmap{height:150px;background:#dff1ec;position:relative;overflow:hidden}
+.bmap svg{width:100%;height:100%}
+.bbody{padding:24px 28px 28px}
+.open{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:600;color:var(--teal)}
+.open i{width:8px;height:8px;border-radius:50%;background:var(--wa)}
+
+/* booking */
+.booking{background:linear-gradient(140deg,#0c3b3a,#0f5f5a 60%,#117a70);color:#fff;border-radius:34px;padding:56px;position:relative;overflow:hidden;display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+.booking::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(20,184,166,.45),transparent 65%);top:-160px;right:-120px;animation:drift 14s ease-in-out infinite alternate}
+.booking>*{position:relative}
+.booking .h2{color:#fff}.booking .lead{color:#b8dcd5}
+.steps{list-style:none;margin-top:28px;display:grid;gap:14px}
+.steps li{display:flex;gap:14px;align-items:center;color:#d4ece6;font-size:.93rem}
+.steps b{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:.85rem;flex:none}
+.form{background:#fff;color:var(--ink);border-radius:26px;padding:30px;box-shadow:0 30px 60px -24px rgba(0,0,0,.5)}
+.field{margin-bottom:16px}
+.field label,.field .lb{display:block;font-size:.8rem;font-weight:600;margin-bottom:7px;color:var(--muted)}
+.field select,.field input[type=text],.field input[type=date]{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;font:inherit;background:#fbfaf6;color:var(--ink);transition:.25s}
+.field select:focus,.field input:focus{outline:0;border-color:var(--teal-2);box-shadow:0 0 0 4px rgba(20,184,166,.15)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.seg input{display:none}
+.seg label{margin:0;text-align:center;padding:11px 4px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--ink);transition:.25s;background:#fbfaf6}
+.seg label small{display:block;font-weight:500;color:var(--muted);font-size:.68rem}
+.seg input:checked+label{background:var(--teal);border-color:var(--teal);color:#fff}
+.seg input:checked+label small{color:#c8efe8}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.note{font-size:.8rem;background:#fff7e2;border:1px solid #f0dca0;color:#6c5513;padding:11px 14px;border-radius:14px;margin-bottom:16px}
+.preview{background:#e9f7ee;border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:.84rem;white-space:pre-line;color:#15402a;margin-bottom:16px;border:1px solid #cfe9d8;min-height:90px}
+.closed-note{font-size:.8rem;color:var(--teal);font-weight:600;margin-bottom:12px;display:none}
+.sendrow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.tiny{font-size:.72rem;color:var(--muted);max-width:24ch;line-height:1.4}
+.hero-cta{gap:10px}
+@media(max-width:900px){.booking{grid-template-columns:1fr;padding:32px 22px}.form{padding:22px}}
+
+/* doctors */
+.doc{text-align:center}
+.avatar{width:104px;height:104px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:2rem;color:#fff;position:relative}
+.avatar::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1.5px dashed rgba(15,118,110,.4);animation:spin 20s linear infinite}
+.doc small{color:var(--teal);font-weight:600;font-size:.8rem}
+.days{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.days span{font-size:.72rem;padding:3px 10px;border-radius:999px;background:var(--mint);color:var(--teal);font-weight:600}
+
+/* faq */
+details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 24px;margin-bottom:12px;transition:.3s}
+details[open]{border-color:#bfe6dc;box-shadow:var(--shadow)}
+summary{list-style:none;cursor:pointer;padding:20px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.5rem;color:var(--teal);transition:.3s;font-weight:400}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 20px;color:var(--muted);font-size:.93rem}
+
+/* page head */
+.phead{padding:160px 0 50px;position:relative;overflow:hidden}
+.phead h1{font-size:clamp(2.2rem,4.6vw,3.6rem);margin:14px 0}
+.crumb{font-size:.85rem;color:var(--muted)}.crumb a{color:var(--teal);font-weight:600}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:start}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.bigmap{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#dff1ec;height:300px}
+.bigmap svg{width:100%;height:100%}
+.list{list-style:none;display:grid;gap:14px}
+.list li{display:flex;gap:14px;align-items:flex-start;font-size:.95rem}
+.list svg{flex:none;width:22px;height:22px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
+.hours{width:100%;border-collapse:collapse;font-size:.92rem}
+.hours td{padding:9px 0;border-bottom:1px dashed var(--line)}.hours td:last-child{text-align:right;font-weight:600}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gal div{aspect-ratio:4/3;border-radius:18px;display:grid;place-items:center;color:rgba(255,255,255,.9);font-size:.78rem;font-weight:600;position:relative;overflow:hidden;transition:.5s}
+.gal div:hover{transform:scale(1.03) rotate(-1deg)}
+.gal div::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 55%)}
+.prose{max-width:760px}.prose h3{font-size:1.4rem;margin:28px 0 8px}.prose p,.prose li{color:var(--muted);margin-bottom:10px}.prose ul{padding-left:20px}
+
+/* footer */
+footer{background:var(--ink);color:#b9d1cd;padding:70px 0 30px;margin-top:40px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+footer a{display:block;padding:4px 0;font-size:.92rem;transition:.2s}footer a:hover{color:#fff;transform:translateX(4px)}
+.disc{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;font-size:.78rem;color:#86a39e}
+
+/* floating wa */
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;width:62px;height:62px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 16px 34px -8px rgba(31,170,89,.7);transition:.3s;animation:pulse 2.4s infinite}
+.fab:hover{transform:scale(1.1) rotate(-6deg)}
+.fab svg{width:30px;fill:#fff}
+.fab span{position:absolute;right:76px;background:#fff;color:var(--ink);font-size:.8rem;font-weight:600;padding:8px 14px;border-radius:12px;white-space:nowrap;box-shadow:var(--shadow);opacity:0;transform:translateX(10px);transition:.3s;pointer-events:none}
+.fab:hover span{opacity:1;transform:none}
+
+.mock{position:fixed;left:14px;bottom:14px;z-index:60;background:rgba(15,42,46,.88);color:#cfe9e4;font-size:.7rem;padding:7px 12px;border-radius:999px;backdrop-filter:blur(8px)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.page{animation:pagein .6s ease}
+@keyframes pagein{from{opacity:0;transform:translateY(12px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#/" class="logo">
+      <i><svg width="20" height="20" viewBox="0 0 200 200"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"/></svg></i>
+      <span>Arunika<small>Klinik Gigi</small></span>
+    </a>
+    <nav class="links" id="links">
+      <a href="#/" data-r="home">Beranda</a>
+      <a href="#/layanan" data-r="layanan">Layanan</a>
+      <a href="#/dokter" data-r="dokter">Dokter</a>
+      <a href="#/cabang/1" data-r="cabang">Cabang</a>
+      <a href="#/tentang" data-r="tentang">Tentang &amp; FAQ</a>
+      <a href="#/kontak" data-r="kontak">Kontak</a>
+    </nav>
+    <a href="#/" class="btn btn-wa nav-cta" id="navCta">Buat janji</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a href="#/" class="logo" style="color:#fff;margin-bottom:14px">Arunika</a>
+        <p style="font-size:.9rem;max-width:32ch">Klinik gigi dengan tiga cabang. Pembuatan janji temu mudah melalui WhatsApp.</p>
+      </div>
+      <div><h4>Halaman</h4><a href="#/layanan">Layanan</a><a href="#/dokter">Dokter</a><a href="#/tentang">Tentang &amp; FAQ</a><a href="#/kontak">Kontak</a></div>
+      <div><h4>Cabang</h4><a href="#/cabang/1">Pusat Kota</a><a href="#/cabang/2">Timur</a><a href="#/cabang/3">Barat</a></div>
+      <div><h4>Legal</h4><a href="#/privasi">Kebijakan privasi</a><a href="#/syarat">Syarat penggunaan</a></div>
+    </div>
+    <p class="disc">Informasi di website ini bersifat edukatif dan bukan pengganti pemeriksaan oleh dokter gigi. Mohon tidak menuliskan keluhan atau riwayat kesehatan pada pesan pertama. © 2026 Klinik Gigi Arunika (nama dan data contoh untuk mockup).</p>
+  </div>
+</footer>
+
+<a class="fab" id="fab" href="#/" aria-label="Booking via WhatsApp" target="_blank" rel="noopener">
+  <span id="fabTip">Buat janji via WhatsApp</span>
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.2.1.400 0 .5l-.4.600c-.2.200-.3.300-.1.600.600 1 1.300 1.700 2.300 2.200.3.100.5.100.6-.1l.8-1c.2-.2.400-.2.600-.1l1.900.9c.2.100.4.200.5.300.1.300.1.800-.1 1.400z"/></svg>
+</a>
+<div class="mock">Mockup · nama, alamat, nomor &amp; data adalah contoh</div>
+
+<script>
+/* ============ DATA CONTOH ============ */
+const BRANCHES=[
+ {id:1,name:'Pusat Kota',addr:'Jl. Contoh Raya No. 12, Kecamatan Tengah, [Kota]',wa:'6281200000001',open:[9,20],hoursTxt:[['Senin – Jumat','09.00 – 20.00'],['Sabtu','09.00 – 17.00'],['Minggu & hari libur','Tutup']],closedDays:[0],sat:17,code:'WEB-CAB1',tag:'Fasilitas 4 kursi perawatan'},
+ {id:2,name:'Timur',addr:'Jl. Sampel Timur No. 45, Kecamatan Timur, [Kota]',wa:'6281200000002',open:[9,20],hoursTxt:[['Senin – Jumat','09.00 – 20.00'],['Sabtu','09.00 – 17.00'],['Minggu & hari libur','Tutup']],closedDays:[0],sat:17,code:'WEB-CAB2',tag:'Area parkir tersedia'},
+ {id:3,name:'Barat',addr:'Jl. Percobaan Barat No. 8, Kecamatan Barat, [Kota]',wa:'6281200000003',open:[10,19],hoursTxt:[['Senin – Sabtu','10.00 – 19.00'],['Minggu & hari libur','Tutup']],closedDays:[0],sat:19,code:'WEB-CAB3',tag:'Ruang tunggu ramah anak'}
+];
+const SERVICES=[
+ {n:'Pemeriksaan & Konsultasi',d:'Pemeriksaan kondisi gigi dan mulut secara menyeluruh, serta diskusi tentang rencana perawatan bersama dokter.',i:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/>'},
+ {n:'Pembersihan Karang Gigi',d:'Prosedur membersihkan plak dan karang gigi (scaling) sebagai bagian dari perawatan kebersihan mulut berkala.',i:'<path d="M12 3l1.800 4.200L18 9l-4.200 1.800L12 15l-1.800-4.200L6 9l4.200-1.800z"/><path d="M19 15l.8 1.700L21.500 17.500l-1.700.8L19 20l-.8-1.700-1.700-.8 1.700-.8z"/>'},
+ {n:'Tambal Gigi',d:'Penjelasan umum mengenai tambalan untuk memperbaiki gigi yang berlubang, sesuai penilaian dokter.',i:'<path d="M4 20l6-6"/><path d="M14 4l6 6-8 8-6-6z"/>'},
+ {n:'Pencabutan Gigi',d:'Tindakan pencabutan gigi yang dilakukan dokter dengan prosedur yang sesuai kondisi masing-masing pasien.',i:'<path d="M12 3v14"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/>'},
+ {n:'Perawatan Saluran Akar',d:'Perawatan pada bagian dalam gigi. Dokter akan menjelaskan tahapan dan jumlah kunjungan yang dibutuhkan.',i:'<path d="M12 3c-4 0-6 2-6 5 0 4 2 5 2 9 0 2 1 4 2 4s1-3 2-3 1 3 2 3 2-2 2-4c0-4 2-5 2-9 0-3-2-5-6-5z"/>'},
+ {n:'Kawat Gigi (Ortodonti)',d:'Konsultasi mengenai penataan susunan gigi dan rahang. Dokter menjelaskan pilihan dan proses perawatan.',i:'<rect x="3" y="9" width="18" height="6" rx="3"/><path d="M8 9v6M12 9v6M16 9v6"/>'},
+ {n:'Gigi Tiruan',d:'Informasi mengenai penggantian gigi yang hilang, termasuk jenis dan perawatan gigi tiruan.',i:'<path d="M5 8c0-3 3-4 7-4s7 1 7 4-1 8-3 8-2-3-4-3-2 3-4 3-3-5-3-8z"/>'},
+ {n:'Perawatan Gigi Anak',d:'Pemeriksaan dan edukasi kesehatan gigi untuk anak, dengan pendekatan yang nyaman dan bertahap.',i:'<circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/>'}
+];
+const DOCTORS=[
+ {n:'drg. Anindya Prameswari',t:'Dokter Gigi Umum',b:[1,2],d:['Sen','Rab','Jum'],c:['#0f766e','#14b8a6'],ini:'AP'},
+ {n:'drg. Bayu Santosa, Sp.Ort',t:'Spesialis Ortodonti',b:[1],d:['Sel','Kam','Sab'],c:['#1e6f9f','#4cc2d9'],ini:'BS'},
+ {n:'drg. Citra Maharani, Sp.KGA',t:'Spesialis Kedokteran Gigi Anak',b:[2,3],d:['Sen','Sel','Kam'],c:['#9a6b2f','#e5b865'],ini:'CM'},
+ {n:'drg. Dimas Aryaputra',t:'Dokter Gigi Umum',b:[3],d:['Sen–Sab'],c:['#6a4c93','#b79ced'],ini:'DA'}
+];
+const FAQ=[
+ ['Bagaimana cara membuat janji?','Pilih cabang, kategori layanan, tanggal, dan rentang jam pada formulir. Aplikasi WhatsApp akan terbuka dengan pesan yang sudah terisi, lalu Anda tinggal menekan kirim.'],
+ ['Apakah website menyimpan data saya?','Tidak. Pesan dibentuk di perangkat Anda dan tidak dikirim ke server website. Data yang Anda ketik tidak disimpan oleh website.'],
+ ['Mengapa tidak ada kolom keluhan?','Demi privasi. Mohon tidak menuliskan keluhan atau riwayat kesehatan pada pesan pertama. Dokter akan menanyakannya saat pemeriksaan.'],
+ ['Kapan janji saya dikonfirmasi?','Admin cabang akan membalas pada jam kerja untuk mengonfirmasi ketersediaan jadwal.'],
+ ['Apakah jadwal dokter bisa berubah?','Bisa. Jadwal praktik dapat berubah sewaktu-waktu. Admin cabang akan menginformasikan saat konfirmasi janji.'],
+ ['Apakah informasi di website ini pengganti pemeriksaan?','Tidak. Seluruh informasi bersifat edukatif dan tidak menggantikan pemeriksaan oleh dokter gigi.']
+];
+const DAYS=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const ICO={
+ pin:'<path d="M12 21s7-6.200 7-11a7 7 0 0 0-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.500"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ phone:'<path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+ arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+ check:'<path d="m5 12 5 5L20 7"/>'
+};
+const svgI=(p,cls='')=>`<svg class="${cls}" viewBox="0 0 24 24">${p}</svg>`;
+const TOOTH=`<svg class="tooth" viewBox="0 0 200 200"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cdeee6"/></linearGradient></defs><path d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z" fill="url(#tg)" stroke="#0f766e" stroke-width="2.500"/><path d="M62 52c8-8 20-8 28-2" stroke="#14b8a6" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/></svg>`;
+const SPARK=`<svg class="spark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2 7 7 3-7 3-2 7-2-7-7-3 7-3z"/></svg>`;
+const mapSVG=(n=1)=>`<svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice"><rect width="400" height="200" fill="#e4f3ee"/><g stroke="#fff" stroke-width="10" fill="none"><path d="M-10 150 L420 ${90+n*10}"/><path d="M${80+n*30} -10 L${140+n*20} 210"/><path d="M260 -10 L${300-n*10} 210"/></g><g stroke="#cfe6df" stroke-width="3" fill="none"><path d="M-10 60 L420 40"/><path d="M-10 190 L420 170"/></g><rect x="30" y="20" width="60" height="40" rx="8" fill="#cde9d9"/><rect x="300" y="120" width="70" height="50" rx="10" fill="#cfe3ef"/><g transform="translate(${180+n*10} 70)"><circle r="26" fill="#14b8a6" opacity=".2"><animate attributeName="r" values="18;34;18" dur="2.400s" repeatCount="indefinite"/></circle><path d="M0 28C-16 12-18 4-18-4a18 18 0 0 1 36 0c0 8-2 16-18 32z" fill="#0f766e"/><circle cy="-4" r="7" fill="#fff"/></g></svg>`;
+const mapsLink=b=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('Klinik Gigi Arunika '+b.name+' '+b.addr);
+
+/* ============ HELPERS ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const pad=n=>String(n).padStart(2,'0');
+function isOpenNow(b){
+  const d=new Date(),day=d.getDay(),h=d.getHours()+d.getMinutes()/60;
+  if(b.closedDays.includes(day))return false;
+  const end=day===6?b.sat:b.open[1];
+  return h>=b.open[0]&&h<end;
+}
+function todayHours(b){
+  const d=new Date().getDay();
+  if(b.closedDays.includes(d))return 'Tutup hari ini';
+  const end=d===6?b.sat:b.open[1];
+  return `Hari ini ${pad(b.open[0])}.00 – ${pad(end)}.00`;
+}
+const openBadge=b=>isOpenNow(b)?'<span class="open"><i></i>Buka sekarang</span>':'<span class="open" style="color:var(--muted)"><i style="background:#bbb"></i>Tutup saat ini</span>';
+const waLink=(b,msg)=>`https://wa.me/${b.wa}?text=${encodeURIComponent(msg||`Halo Klinik Gigi Arunika cabang ${b.name}, saya ingin membuat janji.\n[Kode: ${b.code}]`)}`;
+
+/* ============ BOOKING ============ */
+function bookingHTML(pre){
+  return `<div class="booking rv" id="booking">
+   <div>
+    <span class="eyebrow" style="color:#7fe3d3">Booking via WhatsApp</span>
+    <h2 class="h2">Buat janji dalam beberapa ketukan.</h2>
+    <p class="lead">Tanpa akun dan tanpa formulir panjang. Pesan dibentuk di perangkat Anda dan dikirim langsung ke admin cabang.</p>
+    <ul class="steps">
+      <li><b>1</b>Pilih cabang dan kategori layanan</li>
+      <li><b>2</b>Tentukan tanggal dan rentang jam</li>
+      <li><b>3</b>Tekan kirim, WhatsApp terbuka otomatis</li>
+    </ul>
+   </div>
+   <form class="form" id="bform" onsubmit="return false">
+    <div class="field"><label for="fb">Cabang</label>
+      <select id="fb">${BRANCHES.map(b=>`<option value="${b.id}" ${b.id==pre?'selected':''}>Cabang ${b.name}</option>`).join('')}</select></div>
+    <div class="field"><label for="fs">Kategori layanan</label>
+      <select id="fs">${SERVICES.map(s=>`<option>${s.n}</option>`).join('')}</select></div>
+    <div class="row2">
+      <div class="field"><label for="fd">Tanggal</label><input type="date" id="fd"></div>
+      <div class="field"><label for="fn">Nama panggilan (opsional)</label><input type="text" id="fn" maxlength="30" placeholder="mis. Rina" autocomplete="off"></div>
+    </div>
+    <div class="field"><span class="lb">Rentang jam</span>
+      <div class="seg">
+        <input type="radio" name="fr" id="r1" value="Pagi" checked><label for="r1">Pagi<small>09–12</small></label>
+        <input type="radio" name="fr" id="r2" value="Siang"><label for="r2">Siang<small>12–15</small></label>
+        <input type="radio" name="fr" id="r3" value="Sore"><label for="r3">Sore<small>15–19</small></label>
+        <input type="radio" name="fr" id="r4" value="Bebas"><label for="r4">Bebas<small>fleksibel</small></label>
+      </div></div>
+    <div class="note">Mohon tidak menuliskan keluhan atau riwayat kesehatan pada pesan pertama. Dokter akan menanyakan saat pemeriksaan.</div>
+    <div class="preview" id="fp"></div>
+    <div class="closed-note" id="fc">Di luar jam operasional. Pesan akan dibalas pada jam kerja.</div>
+    <div class="sendrow">
+      <a class="btn btn-wa" id="fsend" href="#" target="_blank" rel="noopener">Kirim via WhatsApp ${svgI(ICO.arrow,'')}</a>
+      <p class="tiny">Pesan dibentuk di perangkat Anda dan tidak disimpan website.</p>
+    </div>
+   </form></div>`;
+}
+function bindBooking(){
+  const f=$('#bform');if(!f)return;
+  const d=$('#fd');const t=new Date();const iso=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
+  d.min=iso;d.value=iso;
+  const upd=()=>{
+    const b=BRANCHES.find(x=>x.id==$('#fb').value);
+    const nm=$('#fn').value.trim()||'pasien';
+    const dt=d.value?new Date(d.value+'T00:00'):t;
+    const tgl=`${DAYS[dt.getDay()]}, ${dt.getDate()}/${dt.getMonth()+1}/${dt.getFullYear()}`;
+    const r=(f.querySelector('input[name=fr]:checked')||{}).value;
+    const msg=`Halo Klinik Gigi Arunika cabang ${b.name}, saya ${nm} ingin membuat janji.\nLayanan: ${$('#fs').value}\nWaktu yang diinginkan: ${tgl}, ${r}\n[Kode: ${b.code}]`;
+    $('#fp').textContent=msg;
+    $('#fsend').href=waLink(b,msg);
+    $('#fc').style.display=isOpenNow(b)?'none':'block';
+  };
+  f.addEventListener('input',upd);f.addEventListener('change',upd);upd();
+}
+
+/* ============ VIEWS ============ */
+const ctaHeader=(extra='')=>`<div class="hero-cta"><a class="btn btn-wa" href="#booking" onclick="goBook(event)">Buat janji ${svgI(ICO.arrow)}</a>${extra}</div>`;
+function branchCard(b,i){
+  return `<a href="#/cabang/${b.id}" class="card bcard rv d${i+1}">
+    <div class="bmap">${mapSVG(b.id)}</div>
+    <div class="bbody"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.78rem">${openBadge(b)}<span style="color:var(--muted);font-weight:500">${todayHours(b)}</span></div><h3 style="margin-top:8px">Cabang ${b.name}</h3>
+    <p>${b.addr}</p><span class="tag">${b.tag}</span><br>
+    <span class="more">Lihat cabang ${svgI(ICO.arrow)}</span></div></a>`;
+}
+function serviceCard(s,i){
+  return `<div class="card rv d${(i%3)+1}"><div class="ico"><svg viewBox="0 0 24 24">${s.i}</svg></div><h3>${s.n}</h3><p>${s.d}</p></div>`;
+}
+function doctorCard(x,i){
+  return `<div class="card doc rv d${(i%3)+1}">
+   <div class="avatar" style="background:linear-gradient(135deg,${x.c[0]},${x.c[1]})">${x.ini}</div>
+   <h3 style="font-size:1.15rem">${x.n}</h3><small>${x.t}</small>
+   <p style="margin-top:8px;font-size:.85rem">Cabang ${x.b.map(id=>BRANCHES[id-1].name).join(' &amp; ')}</p>
+   <div class="days">${x.d.map(a=>`<span>${a}</span>`).join('')}</div></div>`;
+}
+const faqHTML=()=>FAQ.map(q=>`<details class="rv"><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('');
+
+const VIEWS={
+home:()=>`
+<section class="hero"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+ <div class="wrap hero-grid">
+  <div>
+   <span class="eyebrow">Klinik gigi · 3 cabang di [Kota]</span>
+   <h1>Perawatan gigi yang <em>tertata<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 8C40 2 90 2 130 6S180 8 198 4"/></svg></em>, dari janji temu hingga ruang periksa.</h1>
+   <p class="lead">Temukan cabang terdekat, kenali dokter kami, dan buat janji lewat WhatsApp tanpa antre telepon.</p>
+   ${ctaHeader('<a class="btn btn-ghost" href="#/layanan">Lihat layanan</a>')}
+   <div class="facts">
+     <div class="fact"><b>3</b>cabang</div>
+     <div class="fact"><b>4</b>dokter gigi</div>
+     <div class="fact"><b>8</b>kategori layanan</div>
+   </div>
+  </div>
+  <div class="hero-art">
+   <div class="ring r1"></div><div class="ring r2"></div>
+   ${TOOTH}${SPARK}${SPARK}${SPARK}
+   <div class="chip c1"><span class="dot"></span>Tiga cabang, satu cara booking</div>
+   <div class="chip c2">${svgI(ICO.check,'').replace('<svg','<svg style="width:18px;stroke:#0f766e;fill:none;stroke-width:2.500"')}Booking cukup 4 langkah singkat</div>
+  </div>
+ </div>
+ <a class="cue" href="#cabang-list" onclick="event.preventDefault();window.scrollTo({top:innerHeight-20,behavior:'smooth'})"><i></i>Scroll</a></section>
+
+
+<section><div class="wrap">
+ <div class="rv"><span class="eyebrow">Cabang kami</span><h2 class="h2">Pilih cabang yang paling dekat.</h2><p class="lead">Setiap cabang memiliki halaman, jam praktik, dan nomor WhatsApp sendiri.</p></div>
+ <div class="grid g3" style="margin-top:38px">${BRANCHES.map(branchCard).join('')}</div>
+</div></section>
+
+<section style="background:var(--sand)"><div class="wrap">
+ <div class="rv"><span class="eyebrow">Layanan</span><h2 class="h2">Layanan gigi untuk berbagai kebutuhan.</h2><p class="lead">Penjelasan bersifat edukatif. Rencana perawatan ditentukan dokter setelah pemeriksaan.</p></div>
+ <div class="grid g4" style="margin-top:38px">${SERVICES.map(serviceCard).join('')}</div>
+</div></section>
+
+<section><div class="wrap">${bookingHTML(1)}</div></section>
+
+<section style="padding-top:20px"><div class="wrap">
+ <div class="rv" style="text-align:center;margin-bottom:38px"><span class="eyebrow">Tim dokter</span><h2 class="h2">Dokter yang praktik di cabang kami.</h2></div>
+ <div class="grid g4">${DOCTORS.map(doctorCard).join('')}</div>
+</div></section>
+
+<section style="padding-top:20px"><div class="wrap" style="max-width:820px">
+ <div class="rv" style="text-align:center;margin-bottom:34px"><span class="eyebrow">FAQ</span><h2 class="h2">Pertanyaan yang sering diajukan.</h2></div>
+ ${faqHTML()}
+</div></section>`,
+
+layanan:()=>`
+<div class="phead"><div class="blob b1" style="opacity:.35"></div><div class="wrap" style="position:relative"><span class="crumb"><a href="#/">Beranda</a> / Layanan</span><h1>Layanan</h1><p class="lead">Informasi umum tentang layanan. Setiap tindakan ditentukan oleh dokter setelah pemeriksaan, dan hasil dapat berbeda pada tiap pasien.</p></div></div>
+<section style="padding-top:20px"><div class="wrap"><div class="grid g3">${SERVICES.map(serviceCard).join('')}</div>
+<div style="margin-top:60px">${bookingHTML(1)}</div></div></section>`,
+
+dokter:()=>`
+<div class="phead"><div class="blob b2" style="opacity:.35"></div><div class="wrap" style="position:relative"><span class="crumb"><a href="#/">Beranda</a> / Dokter</span><h1>Dokter</h1><p class="lead">Jadwal praktik dapat berubah. Admin cabang akan mengonfirmasi saat Anda membuat janji.</p></div></div>
+<section style="padding-top:20px"><div class="wrap"><div class="grid g4">${DOCTORS.map(doctorCard).join('')}</div>
+<div style="margin-top:60px">${bookingHTML(1)}</div></div></section>`,
+
+tentang:()=>`
+<div class="phead"><div class="blob b1" style="opacity:.3"></div><div class="wrap" style="position:relative"><span class="crumb"><a href="#/">Beranda</a> / Tentang &amp; FAQ</span><h1>Tentang klinik</h1></div></div>
+<section style="padding-top:20px"><div class="wrap split">
+ <div class="prose rv"><p style="font-size:1.1rem;color:var(--ink)">Klinik Gigi Arunika adalah klinik gigi dengan tiga cabang di [Kota]. Kami berfokus pada pelayanan yang tertata, komunikasi yang jelas, dan privasi pasien.</p>
+ <h3>Cara kami bekerja</h3><ul><li>Janji temu dibuat melalui WhatsApp ke admin cabang.</li><li>Website tidak menyimpan data pribadi maupun data kesehatan.</li><li>Seluruh konten ditinjau dokter sebelum tayang.</li></ul></div>
+ <div class="card rv d2"><h3>Ringkasan</h3><ul class="list" style="margin-top:16px">
+  <li>${svgI(ICO.pin)}3 cabang dengan jam praktik masing-masing</li>
+  <li>${svgI(ICO.clock)}Dokter umum dan spesialis</li>
+  <li>${svgI(ICO.phone)}Booking melalui WhatsApp</li></ul></div>
+</div></section>
+<section style="padding-top:0"><div class="wrap" style="max-width:820px"><div class="rv" style="margin-bottom:28px"><span class="eyebrow">FAQ</span><h2 class="h2">Pertanyaan umum</h2></div>${faqHTML()}</div></section>`,
+
+kontak:()=>`
+<div class="phead"><div class="blob b2" style="opacity:.3"></div><div class="wrap" style="position:relative"><span class="crumb"><a href="#/">Beranda</a> / Kontak</span><h1>Kontak</h1><p class="lead">Hubungi cabang melalui WhatsApp pada jam kerja.</p></div></div>
+<section style="padding-top:20px"><div class="wrap"><div class="grid g3">${BRANCHES.map(b=>`
+ <div class="card rv d${b.id}"><h3>Cabang ${b.name}</h3><p style="margin:8px 0 14px">${b.addr}</p>${openBadge(b)}
+ <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><a class="btn btn-wa" style="padding:11px 18px;font-size:.85rem" target="_blank" rel="noopener" href="${waLink(b)}">WhatsApp</a><a class="btn btn-ghost" style="padding:11px 18px;font-size:.85rem" target="_blank" rel="noopener" href="${mapsLink(b)}">Rute</a></div></div>`).join('')}</div>
+<div style="margin-top:60px">${bookingHTML(1)}</div></div></section>`,
+
+privasi:()=>`
+<div class="phead"><div class="wrap"><span class="crumb"><a href="#/">Beranda</a> / Kebijakan privasi</span><h1>Kebijakan privasi</h1></div></div>
+<section style="padding-top:10px"><div class="wrap prose">
+<p>Ringkasan contoh (draf untuk mockup, perlu ditinjau ahli hukum sebelum tayang).</p>
+<h3>Data yang dikumpulkan</h3><p>Website ini tidak menyimpan nama, nomor telepon, maupun isi pesan booking. Pesan WhatsApp dibentuk di perangkat Anda.</p>
+<h3>Data kesehatan</h3><p>Website tidak menyediakan kolom keluhan, gejala, atau riwayat penyakit. Mohon tidak mengirimkannya pada pesan pertama.</p>
+<h3>Analitik</h3><p>Kami hanya mencatat peristiwa agregat seperti jumlah klik tombol booking, tanpa data pribadi.</p>
+<h3>Pengendali data</h3><p>Klinik bertindak sebagai pengendali data. Hubungi cabang untuk pertanyaan terkait data Anda.</p></div></section>`,
+
+syarat:()=>`
+<div class="phead"><div class="wrap"><span class="crumb"><a href="#/">Beranda</a> / Syarat penggunaan</span><h1>Syarat penggunaan</h1></div></div>
+<section style="padding-top:10px"><div class="wrap prose">
+<p>Informasi di website ini bersifat edukatif dan bukan pengganti pemeriksaan, diagnosis, atau perawatan oleh dokter gigi.</p>
+<h3>Jadwal</h3><p>Pembuatan janji melalui WhatsApp baru berlaku setelah dikonfirmasi admin cabang.</p>
+<h3>Konten</h3><p>Hasil perawatan dapat berbeda pada setiap pasien. Konten tidak memuat janji hasil.</p></div></section>`
+};
+
+function branchView(id){
+  const b=BRANCHES.find(x=>x.id==id)||BRANCHES[0];
+  const docs=DOCTORS.filter(d=>d.b.includes(b.id));
+  const grads=[['#0f766e','#5eead4'],['#1e6f9f','#7dd3fc'],['#9a6b2f','#fcd34d'],['#6a4c93','#c4b5fd'],['#0f766e','#86efac'],['#475569','#94a3b8']];
+  const labels=['Ruang tunggu','Ruang periksa','Area sterilisasi','Resepsionis','Ruang anak','Tampak depan'];
+  return `
+<div class="phead"><div class="blob b1" style="opacity:.35"></div><div class="wrap" style="position:relative">
+ <span class="crumb"><a href="#/">Beranda</a> / Cabang</span>
+ <div style="display:flex;gap:10px;margin:18px 0 6px;flex-wrap:wrap">${BRANCHES.map(x=>`<a href="#/cabang/${x.id}" class="btn ${x.id==b.id?'btn-dark':'btn-ghost'}" style="padding:9px 18px;font-size:.85rem">${x.name}</a>`).join('')}</div>
+ <h1>Cabang ${b.name}</h1><div style="margin-top:6px">${openBadge(b)}</div></div></div>
+<section style="padding-top:20px"><div class="wrap split">
+ <div>
+  <div class="bigmap rv">${mapSVG(b.id)}</div>
+  <div class="gal rv d1" style="margin-top:18px">${labels.map((l,i)=>`<div style="background:linear-gradient(135deg,${grads[i][0]},${grads[i][1]})">${l}</div>`).join('')}</div>
+  <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Foto fasilitas contoh (placeholder). Tanpa foto pasien.</p>
+ </div>
+ <div class="card rv d2">
+  <ul class="list">
+   <li>${svgI(ICO.pin)}<span>${b.addr}</span></li>
+   <li>${svgI(ICO.phone)}<span>WhatsApp cabang: +${b.wa.replace(/(\d{2})(\d{3})(\d{4})(\d+)/,'$1 $2-$3-$4')}</span></li>
+  </ul>
+  <h3 style="font-size:1.1rem;margin:22px 0 8px">Jam praktik</h3>
+  <table class="hours">${b.hoursTxt.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+   <a class="btn btn-wa" href="#booking" onclick="goBook(event)">Buat janji</a>
+   <a class="btn btn-ghost" target="_blank" rel="noopener" href="${mapsLink(b)}">Rute Google Maps</a>
+  </div>
+ </div>
+</div></section>
+<section style="padding-top:0"><div class="wrap">
+ <div class="rv" style="margin-bottom:28px"><span class="eyebrow">Dokter di cabang ini</span><h2 class="h2">Jadwal praktik</h2></div>
+ <div class="grid g3">${docs.map(doctorCard).join('')}</div>
+</div></section>
+<section style="padding-top:0"><div class="wrap">${bookingHTML(b.id)}</div></section>`;
+}
+
+/* ============ ROUTER ============ */
+function goBook(e){e.preventDefault();const el=$('#booking');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}
+let currentBranch=null;
+let lastRoute=null;
+function route(force){
+  const forced=typeof force==='string';
+  const h=(forced?force:location.hash).replace(/^#\/?/,'');
+  if(h==='booking'||h.startsWith('booking'))return;
+  if(!forced&&h===lastRoute)return;
+  lastRoute=h;
+  const [r,p]=h.split('/');
+  const key=r||'home';
+  const app=$('#app');
+  let html;
+  currentBranch=null;
+  if(key==='cabang'){html=branchView(p);currentBranch=BRANCHES.find(x=>x.id==p)||BRANCHES[0]}
+  else html=(VIEWS[key]||VIEWS.home)();
+  app.innerHTML=`<div class="page">${html}</div>`;
+  window.scrollTo({top:0,behavior:'instant'});
+  document.querySelectorAll('#links a').forEach(a=>a.classList.toggle('active',a.dataset.r===(key==='cabang'?'cabang':key)));
+  $('#links').classList.remove('open');
+  bindBooking();reveal();updateFab();
+}
+function updateFab(){
+  const f=$('#fab');
+  if(currentBranch){f.href=waLink(currentBranch);$('#fabTip').textContent='WhatsApp cabang '+currentBranch.name;f.onclick=null}
+  else{f.href='#booking';f.removeAttribute('target');$('#fabTip').textContent='Buat janji via WhatsApp';f.onclick=goBook}
+  if(currentBranch)f.target='_blank';
+  $('#navCta').onclick=goBook;$('#navCta').href='#booking';
+}
+function reveal(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+}
+window.addEventListener('hashchange',()=>route());
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#/"]');
+  if(!a||e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey)return;
+  e.preventDefault();
+  const t=a.getAttribute('href');
+  try{location.hash=t}catch(_){}
+  route(t);
+});
+window.addEventListener('scroll',()=>$('#nav').classList.toggle('scrolled',scrollY>20),{passive:true});
+$('#burger').addEventListener('click',()=>$('#links').classList.toggle('open'));
+route();
+</script>
+</body>
+</html>

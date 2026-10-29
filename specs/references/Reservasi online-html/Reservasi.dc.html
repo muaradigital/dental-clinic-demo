@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Reservasi online Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f7f5ef;color:#0f2a2e;line-height:1.55;min-height:1100px">
+
+<!-- NAV -->
+<div style="max-width:1200px;margin:0 auto;padding:18px 40px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+  <a href="#" style="display:flex;align-items:center;gap:10px">
+    <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:22px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5b7074;font-weight:600">Klinik Gigi</div></div>
+  </a>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;font-size:14px;font-weight:500;color:#5b7074">
+    <a href="#" style="padding:8px 14px">Beranda</a><a href="#" style="padding:8px 14px">Layanan</a><a href="#" style="padding:8px 14px">Dokter</a><a href="#" style="padding:8px 14px">Cabang</a><a href="#" style="padding:8px 14px;border-radius:999px;background:#d8f3ec;color:#0f2a2e">Reservasi</a>
+  </div>
+  <a href="#" style="font-size:14px;font-weight:600;border:1.5px solid #0f2a2e;padding:8.5px 18px;border-radius:999px">Hubungi cabang</a>
+</div>
+
+<div style="max-width:1200px;margin:0 auto;padding:24px 40px 80px;box-sizing:border-box">
+  <div style="font-size:13px;color:#5b7074"><a href="#" style="color:#0f766e;font-weight:600">Beranda</a> / Reservasi</div>
+  <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:48px;line-height:1.1;margin:12px 0 10px">Reservasi online</h1>
+  <p style="margin:0 0 34px;color:#5b7074;max-width:560px">Pilih cabang, layanan, dan jam yang tersedia. Admin cabang akan mengonfirmasi lewat WhatsApp.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+    <!-- LEFT -->
+    <div style="flex:1 1 620px;min-width:0;display:flex;flex-direction:column;gap:22px">
+
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:24px;padding:28px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><span style="width:28px;height:28px;border-radius:50%;background:#0f766e;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span><h2 style="font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0">Cabang dan layanan</h2></div>
+        <div style="font-size:12px;font-weight:600;color:#5b7074;margin-bottom:8px">Cabang</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px">
+          <sc-for list="{{ branches }}" as="b" hint-placeholder-count="3">
+            <button type="button" onClick="{{ b.pick }}" style="{{ b.css }}"><span style="display:block;font-weight:600;font-size:14px">{{ b.name }}</span><span style="display:block;font-size:12px;opacity:.8">{{ b.hours }}</span></button>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:#5b7074;margin-bottom:8px">Kategori layanan</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="8">
+            <button type="button" onClick="{{ s.pick }}" style="{{ s.css }}">{{ s.name }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:24px;padding:28px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><span style="width:28px;height:28px;border-radius:50%;background:#0f766e;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span><h2 style="font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0">Tanggal dan jam</h2></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px">
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="7">
+            <button type="button" onClick="{{ d.pick }}" disabled="{{ d.closed }}" style="{{ d.css }}"><span style="display:block;font-size:12px;font-weight:600">{{ d.w }}</span><span style="display:block;font-family:'Fraunces',serif;font-size:22px;line-height:1.2">{{ d.n }}</span><span style="display:block;font-size:11px">{{ d.note }}</span></button>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:#5b7074;margin-bottom:8px">Jam tersedia · {{ dayLabel }}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ slots }}" as="t" hint-placeholder-count="8">
+            <button type="button" onClick="{{ t.pick }}" disabled="{{ t.full }}" style="{{ t.css }}">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:12px;color:#5b7074"><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#0f766e;margin-right:6px"></span>Dipilih</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;border:1.5px solid #cfd8d4;margin-right:6px"></span>Tersedia</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#ece9df;margin-right:6px"></span>Penuh</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div style="flex:1 1 340px;max-width:400px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:24px;padding:28px;box-shadow:0 24px 50px -30px rgba(15,60,60,.4)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><span style="width:28px;height:28px;border-radius:50%;background:#0f766e;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span><h2 style="font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0">Data kontak</h2></div>
+
+      <div style="background:#d8f3ec;border-radius:16px;padding:14px 16px;font-size:13px;margin-bottom:18px">
+        <div style="font-weight:600;color:#0f2a2e">{{ sumBranch }}</div>
+        <div style="color:#0f2a2e">{{ sumService }}</div>
+        <div style="color:#0f766e;font-weight:600;margin-top:4px">{{ sumTime }}</div>
+      </div>
+
+      <label for="rn" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Nama (nama panggilan boleh)</label>
+      <input id="rn" type="text" placeholder="mis. Rina" style="width:100%;box-sizing:border-box;padding:13px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e;margin-bottom:14px">
+      <label for="rw" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Nomor WhatsApp</label>
+      <input id="rw" type="text" placeholder="08xx xxxx xxxx" style="width:100%;box-sizing:border-box;padding:13px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e;margin-bottom:16px">
+
+      <div style="background:#fff7e2;border:1px solid #f0dca0;color:#6c5513;font-size:12.5px;padding:11px 14px;border-radius:14px;margin-bottom:16px">Jangan menulis keluhan atau riwayat kesehatan di sini. Dokter akan menanyakannya saat pemeriksaan.</div>
+
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:20px">
+        <input id="rc" type="checkbox" style="width:18px;height:18px;margin:2px 0 0;accent-color:#0f766e;flex:none">
+        <label for="rc" style="font-size:12.5px;color:#5b7074">Saya setuju nama dan nomor WhatsApp saya disimpan untuk konfirmasi dan pengingat janji selama [12] bulan.</label>
+      </div>
+
+      <button type="button" style="{{ ctaCss }}">Konfirmasi reservasi</button>
+      <p style="margin:12px 0 0;font-size:12px;color:#5b7074;text-align:center">Reservasi baru berlaku setelah dikonfirmasi admin cabang lewat WhatsApp.</p>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const bi = st.branch != null ? st.branch : 0;
+    const si = st.svc != null ? st.svc : 0;
+    const di = st.day != null ? st.day : 0;
+    const slot = st.slot != null ? st.slot : null;
+
+    const BR = [
+      { name: 'Pusat Kota', hours: '09.00 – 20.00', open: 9, close: 20, sat: 17 },
+      { name: 'Timur', hours: '09.00 – 20.00', open: 9, close: 20, sat: 17 },
+      { name: 'Barat', hours: '10.00 – 19.00', open: 10, close: 19, sat: 19 }
+    ];
+    const SV = ['Pemeriksaan & Konsultasi', 'Pembersihan Karang Gigi', 'Tambal Gigi', 'Pencabutan Gigi', 'Perawatan Saluran Akar', 'Kawat Gigi (Ortodonti)', 'Gigi Tiruan', 'Perawatan Gigi Anak'];
+    const DY = [
+      { w: 'Kam', n: '29', dow: 4, full: 'Kamis, 29 Okt 2026' },
+      { w: 'Jum', n: '30', dow: 5, full: 'Jumat, 30 Okt 2026' },
+      { w: 'Sab', n: '31', dow: 6, full: 'Sabtu, 31 Okt 2026' },
+      { w: 'Min', n: '1', dow: 0, full: 'Minggu, 1 Nov 2026' },
+      { w: 'Sen', n: '2', dow: 1, full: 'Senin, 2 Nov 2026' },
+      { w: 'Sel', n: '3', dow: 2, full: 'Selasa, 3 Nov 2026' },
+      { w: 'Rab', n: '4', dow: 3, full: 'Rabu, 4 Nov 2026' }
+    ];
+
+    const b = BR[bi];
+    const day = DY[di];
+    const closedDay = day.dow === 0;
+    const end = day.dow === 6 ? b.sat : b.close;
+    const pad = (n) => (n < 10 ? '0' + n : '' + n);
+
+    const baseBtn = 'cursor:pointer;font-family:inherit;border-radius:14px;';
+    const on = 'background:#0f766e;color:#fff;border:1.5px solid #0f766e;';
+    const off = 'background:#fff;color:#0f2a2e;border:1.5px solid #cfd8d4;';
+
+    const branches = BR.map((x, i) => ({
+      name: x.name,
+      hours: x.hours,
+      css: baseBtn + 'text-align:left;padding:12px 18px;flex:1 1 160px;' + (i === bi ? on : off),
+      pick: () => this.setState({ branch: i, slot: null })
+    }));
+    const services = SV.map((x, i) => ({
+      name: x,
+      css: baseBtn + 'padding:9px 16px;font-size:13px;font-weight:600;border-radius:999px;' + (i === si ? on : off),
+      pick: () => this.setState({ svc: i })
+    }));
+    const days = DY.map((x, i) => {
+      const closed = x.dow === 0;
+      const sel = i === di;
+      return {
+        w: x.w, n: x.n, note: closed ? 'Tutup' : 'Buka', closed: closed,
+        css: baseBtn + 'text-align:center;padding:10px 0;width:76px;' +
+          (closed ? 'background:#f3f1ea;color:#7d8c8f;border:1.5px solid #ece9df;cursor:not-allowed;' : (sel ? on : off)),
+        pick: () => this.setState({ day: i, slot: null })
+      };
+    });
+
+    const slots = [];
+    if (!closedDay) {
+      for (let h = b.open; h < end; h++) {
+        const full = ((di + h + bi) % 4) === 0;
+        const sel = slot === h;
+        slots.push({
+          label: pad(h) + '.00' + (full ? ' · penuh' : ''),
+          full: full,
+          css: baseBtn + 'padding:10px 16px;font-size:13px;font-weight:600;min-width:84px;' +
+            (full ? 'background:#ece9df;color:#6b787a;border:1.5px solid #ece9df;cursor:not-allowed;text-decoration:line-through;' : (sel ? on : off)),
+          pick: () => this.setState({ slot: h })
+        });
+      }
+    }
+
+    const ready = slot !== null && !closedDay;
+    return {
+      branches: branches,
+      services: services,
+      days: days,
+      slots: slots,
+      dayLabel: closedDay ? day.full + ' (cabang tutup)' : day.full,
+      sumBranch: 'Cabang ' + b.name,
+      sumService: SV[si],
+      sumTime: ready ? day.full + ' · ' + pad(slot) + '.00' : 'Pilih jam terlebih dahulu',
+      ctaCss: 'width:100%;font-family:inherit;font-size:14px;font-weight:600;padding:14px;border-radius:999px;border:0;' +
+        (ready ? 'background:#0f766e;color:#fff;cursor:pointer;' : 'background:#dfe6e3;color:#51656a;cursor:not-allowed;')
+    };
+  }
+}
+</script>
+</body>
+</html>

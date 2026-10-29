@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Jadwal dan slot Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f1efe8;color:#0f2a2e;line-height:1.5;min-height:1000px;display:flex;flex-wrap:wrap">
+
+<div style="flex:0 0 250px;max-width:100%;box-sizing:border-box;background:#0f2a2e;color:#b9d1cd;padding:24px 18px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;align-items:center;gap:10px;color:#fff">
+    <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="19" height="19" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8fb0aa;font-weight:600">Panel klinik</div></div>
+  </div>
+  <div>
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8fb0aa;font-weight:600;margin-bottom:8px">Cabang aktif</div>
+    <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 14px;color:#fff;font-size:14px;font-weight:600">Pusat Kota</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:2px;font-size:14px;font-weight:500">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="#" style="{{ n.css }}">{{ n.label }}</a></sc-for>
+  </div>
+  <div style="margin-top:auto;font-size:12px;color:#8fb0aa;border-top:1px solid rgba(255,255,255,.12);padding-top:14px"><div style="color:#fff;font-weight:600;font-size:13px">Rudi H.</div>Admin cabang · Pusat Kota</div>
+</div>
+
+<div style="flex:1 1 700px;min-width:0;padding:28px 36px;box-sizing:border-box">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:24px">
+    <div>
+      <div style="font-size:13px;color:#5b7074">Pusat Kota · Minggu 26 Okt – 1 Nov 2026</div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.15;margin:2px 0 0">Jadwal &amp; slot</h1>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button type="button" aria-label="Minggu sebelumnya" style="width:38px;height:38px;border-radius:50%;border:1.5px solid #cfd8d4;background:#fff;cursor:pointer;font-size:16px">‹</button>
+      <button type="button" aria-label="Minggu berikutnya" style="width:38px;height:38px;border-radius:50%;border:1.5px solid #cfd8d4;background:#fff;cursor:pointer;font-size:16px">›</button>
+      <button type="button" style="font-size:13px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:10px 18px;border-radius:999px;cursor:pointer">Simpan perubahan</button>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start">
+    <div style="flex:1 1 640px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:22px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+        <div style="font-family:'Fraunces',serif;font-size:19px">Terisi / kuota per slot</div>
+        <div style="display:flex;gap:14px;font-size:12px;color:#5b7074;flex-wrap:wrap"><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#d8f3ec;margin-right:6px"></span>Tersedia</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#fff1d0;margin-right:6px"></span>Hampir penuh</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#f6d4cf;margin-right:6px"></span>Penuh</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#ece9df;margin-right:6px"></span>Ditutup</span></div>
+      </div>
+      <div style="overflow-x:auto">
+        <div style="min-width:600px">
+          <div style="display:flex;gap:6px;margin-bottom:6px">
+            <div style="flex:0 0 56px"></div>
+            <sc-for list="{{ heads }}" as="h" hint-placeholder-count="6"><div style="flex:1 1 0;min-width:0;text-align:center;font-size:12px;font-weight:600;color:#5b7074">{{ h }}</div></sc-for>
+          </div>
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="11">
+            <div style="display:flex;gap:6px;margin-bottom:6px;align-items:stretch">
+              <div style="flex:0 0 56px;font-size:12px;font-weight:600;color:#5b7074;display:flex;align-items:center">{{ r.time }}</div>
+              <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6"><div style="{{ c.css }}">{{ c.txt }}</div></sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <p style="margin:12px 0 0;font-size:12px;color:#5b7074">Minggu tutup. Klik sel untuk menutup atau membuka slot, atau ubah kuota.</p>
+    </div>
+
+    <div style="flex:1 1 280px;max-width:360px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:20px 22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:12px">Aturan kuota</div>
+        <label for="jk" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Kuota default per slot</label>
+        <input id="jk" type="text" value="3 pasien" style="width:100%;box-sizing:border-box;padding:11px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e;margin-bottom:12px">
+        <label for="jd" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Durasi slot</label>
+        <input id="jd" type="text" value="60 menit" style="width:100%;box-sizing:border-box;padding:11px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e">
+        <p style="margin:12px 0 0;font-size:12px;color:#5b7074">Kuota bisa dikecualikan per dokter di halaman Dokter &amp; cuti.</p>
+      </div>
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:20px 22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:10px">Libur &amp; penutupan</div>
+        <sc-for list="{{ closures }}" as="x" hint-placeholder-count="3">
+          <div style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid #efece3;font-size:13px"><div><div style="font-weight:600">{{ x.name }}</div><div style="color:#5b7074;font-size:12px">{{ x.when }}</div></div><button type="button" style="font-size:12px;font-weight:600;background:transparent;border:0;color:#8a1c12;cursor:pointer">Hapus</button></div>
+        </sc-for>
+        <button type="button" style="margin-top:12px;width:100%;font-size:13px;font-weight:600;border:1.5px solid #0f2a2e;background:transparent;color:#0f2a2e;padding:9px;border-radius:999px;cursor:pointer">Tambah libur</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const on = 'padding:10px 14px;border-radius:12px;background:#0f766e;color:#fff;font-weight:600;';
+    const off = 'padding:10px 14px;';
+    const names = ['Janji hari ini', 'Jadwal & slot', 'Dokter & cuti', 'Pengingat', 'Ulasan Google', 'Laporan', 'Pengguna & log audit'];
+    const nav = names.map((n) => ({ label: n, css: n === 'Jadwal & slot' ? on : off }));
+    const days = [{ l: 'Sen 26', end: 20 }, { l: 'Sel 27', end: 20 }, { l: 'Rab 28', end: 20 }, { l: 'Kam 29', end: 20 }, { l: 'Jum 30', end: 20 }, { l: 'Sab 31', end: 17 }];
+    const cap = 3;
+    const rows = [];
+    for (let h = 9; h < 20; h++) {
+      const cells = days.map((d, di) => {
+        const base = 'flex:1 1 0;min-width:0;text-align:center;padding:9px 0;border-radius:10px;font-size:12.5px;font-weight:600;';
+        if (h >= d.end || (di === 4 && h === 12)) {
+          return { txt: di === 4 && h === 12 ? 'libur' : 'tutup', css: base + 'background:#ece9df;color:#5f6e70;' };
+        }
+        const filled = (di * 2 + h) % 4 === 0 ? 3 : ((di + h) % 4);
+        const f = Math.min(filled, cap);
+        let bg = '#d8f3ec', fg = '#0b5a53';
+        if (f === cap - 1) { bg = '#fff1d0'; fg = '#6c4a00'; }
+        if (f >= cap) { bg = '#f6d4cf'; fg = '#8a1c12'; }
+        return { txt: f + '/' + cap, css: base + 'background:' + bg + ';color:' + fg + ';' };
+      });
+      rows.push({ time: (h < 10 ? '0' + h : '' + h) + '.00', cells: cells });
+    }
+    return {
+      nav: nav,
+      heads: days.map((d) => d.l),
+      rows: rows,
+      closures: [
+        { name: 'Rapat internal klinik', when: 'Jum 30 Okt · 12.00 – 13.00' },
+        { name: 'Libur Maulid Nabi', when: '[tanggal akan diisi klinik]' },
+        { name: 'Natal', when: 'Jum 25 Des 2026 · seharian' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

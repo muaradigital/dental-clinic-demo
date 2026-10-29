@@ -1,0 +1,146 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Fraunces', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Ivory / surface */
+  --color-ivory: #f7f5ef;
+  --color-ivory-input: #fbfaf6;
+  --color-dash-bg: #f1efe8;
+  --color-surface: #ffffff;
+  --color-border: #e3e0d5;
+
+  /* Ink / text */
+  --color-ink: #0f2a2e;
+  --color-muted: #5b7074;
+  --color-on-dark: #b9d1cd;
+  --color-on-dark-muted: #8fb0aa;
+
+  /* Teal family */
+  --color-teal: #0f766e;
+  --color-teal-bright: #14b8a6;
+  --color-teal-on-dark: #5eead4;
+  --color-teal-soft: #0b5a53;
+  --color-teal-deep: #134e4a;
+
+  /* Mint tints */
+  --color-mint: #d8f3ec;
+  --color-mint-2: #cdeee6;
+  --color-mint-3: #eaf8f4;
+  --color-mint-4: #e4f3ee;
+
+  /* Sand / pasir */
+  --color-sand: #efe9dc;
+  --color-sand-blob: #f4e6c8;
+  --color-sand-gold-1: #a8925a;
+  --color-sand-gold-2: #e6d3a0;
+  --color-sand-neutral: #f3f1ea;
+  --color-sand-disabled: #ece9df;
+
+  /* Status pairs */
+  --color-success-bg: #dcf2dd;
+  --color-success-text: #14532d;
+  --color-soft-teal-bg: #d8f3ec;
+  --color-soft-teal-text: #0b5a53;
+  --color-warning-bg: #fff1d0;
+  --color-warning-text: #6c4a00;
+  --color-danger-bg: #fde0dc;
+  --color-danger-text: #8a1c12;
+  --color-neutral-bg: #ece9df;
+  --color-neutral-text: #3a4f53;
+  --color-indigo-bg: #e4e9fb;
+  --color-indigo-text: #2b3a8a;
+  --color-expired-bg: #e6e8ea;
+  --color-expired-text: #475569;
+  --color-open-dot: #15803d;
+
+  /* Notice / warning banner */
+  --color-notice-bg: #fff7e2;
+  --color-notice-border: #f0dca0;
+  --color-notice-text: #6c5513;
+
+  /* WhatsApp */
+  --color-whatsapp: #1faa59;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-card: 22px;
+  --radius-card-lg: 24px;
+  --radius-card-sm: 20px;
+  --radius-banner: 32px;
+  --radius-input: 14px;
+  --radius-chip: 16px;
+
+  /* Shadows (tinted, never pure black) */
+  --shadow-lift: 0 18px 40px -20px rgba(15, 60, 60, 0.35);
+  --shadow-elevated: 0 24px 50px -30px rgba(15, 60, 60, 0.4);
+  --shadow-card: 0 18px 50px -20px rgba(15, 60, 60, 0.25);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Reveal-on-scroll: default VISIBLE, JS opts elements into a hidden->reveal
+   transition. Never ships hidden-by-default, so content is never stuck
+   invisible if JS fails or during a full-page screenshot. */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+.reveal[data-reveal-ready='true'] {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal[data-reveal-ready='true'][data-reveal-in='true'] {
+  opacity: 1;
+  transform: none;
+}
+.reveal-d1[data-reveal-ready='true'] {
+  transition-delay: 0.1s;
+}
+.reveal-d2[data-reveal-ready='true'] {
+  transition-delay: 0.2s;
+}
+.reveal-d3[data-reveal-ready='true'] {
+  transition-delay: 0.3s;
+}
+
+@keyframes wa-pulse {
+  70% {
+    box-shadow: 0 0 0 10px rgba(31, 170, 89, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(31, 170, 89, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal[data-reveal-ready='true'] {
+    opacity: 1;
+    transform: none;
+  }
+}

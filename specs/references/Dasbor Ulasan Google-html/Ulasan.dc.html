@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Ulasan Google Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f1efe8;color:#0f2a2e;line-height:1.5;min-height:1000px;display:flex;flex-wrap:wrap">
+
+<div style="flex:0 0 250px;max-width:100%;box-sizing:border-box;background:#0f2a2e;color:#b9d1cd;padding:24px 18px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;align-items:center;gap:10px;color:#fff">
+    <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="19" height="19" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8fb0aa;font-weight:600">Panel klinik</div></div>
+  </div>
+  <div>
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8fb0aa;font-weight:600;margin-bottom:8px">Cabang aktif</div>
+    <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 14px;color:#fff;font-size:14px;font-weight:600">Semua cabang</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:2px;font-size:14px;font-weight:500">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="#" style="{{ n.css }}">{{ n.label }}</a></sc-for>
+  </div>
+  <div style="margin-top:auto;font-size:12px;color:#8fb0aa;border-top:1px solid rgba(255,255,255,.12);padding-top:14px"><div style="color:#fff;font-weight:600;font-size:13px">Drg. Pemilik</div>Pemilik · Semua cabang</div>
+</div>
+
+<div style="flex:1 1 700px;min-width:0;padding:28px 36px;box-sizing:border-box">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:24px">
+    <div>
+      <div style="font-size:13px;color:#5b7074">Ulasan Google Business Profile · 3 cabang</div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.15;margin:2px 0 0">Ulasan Google</h1>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:13px;font-weight:600">
+      <span style="background:#0f2a2e;color:#fff;padding:8px 16px;border-radius:999px">Semua</span>
+      <span style="border:1.5px solid #cfd8d4;background:#fff;padding:6.5px 16px;border-radius:999px">Pusat Kota</span>
+      <span style="border:1.5px solid #cfd8d4;background:#fff;padding:6.5px 16px;border-radius:999px">Timur</span>
+      <span style="border:1.5px solid #cfd8d4;background:#fff;padding:6.5px 16px;border-radius:999px">Barat</span>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px">
+    <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+      <div style="flex:1 1 150px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:18px;padding:16px 18px">
+        <div style="font-size:12px;font-weight:600;color:#5b7074">{{ s.label }}</div>
+        <div style="font-family:'Fraunces',serif;font-size:34px;line-height:1.2;color:{{ s.color }}">{{ s.value }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start">
+    <div style="flex:1 1 560px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:22px;overflow:hidden">
+      <div style="padding:18px 22px;border-bottom:1px solid #e3e0d5;font-family:'Fraunces',serif;font-size:19px">Daftar ulasan</div>
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="7">
+        <div style="{{ r.rowCss }}">
+          <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between">
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="font-weight:600;font-size:14px">{{ r.who }}</span><span role="img" aria-label="{{ r.starLabel }}" style="color:#b7791f;letter-spacing:2px;font-size:14px">{{ r.stars }}</span><span style="font-size:12px;font-weight:600;color:#0f766e;background:#d8f3ec;padding:2px 10px;border-radius:999px">{{ r.branch }}</span></div>
+            <span style="{{ r.chip }}">{{ r.status }}</span>
+          </div>
+          <div style="font-size:13.5px;margin:8px 0 8px">{{ r.text }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:#5b7074"><span>{{ r.when }}</span><span>{{ r.deadline }}</span><span>PIC: {{ r.pic }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:1 1 300px;max-width:400px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:20px 22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:4px">Balas ulasan</div>
+        <div style="font-size:12px;color:#5b7074;margin-bottom:12px">Hadi P. · Cabang Barat · 2 bintang</div>
+        <div style="background:#faf9f4;border:1px solid #e3e0d5;border-radius:14px;padding:12px 14px;font-size:13px;color:#3a4f53;margin-bottom:14px">"Menunggu agak lama di ruang tunggu."</div>
+        <label for="rb" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Draf balasan</label>
+        <div id="rb" style="background:#fff;border:1.5px solid #0f766e;border-radius:14px;padding:12px 14px;font-size:13px;margin-bottom:12px">Terima kasih atas masukan Anda. Kami mohon maaf atas ketidaknyamanan yang Anda rasakan. Silakan hubungi cabang kami agar dapat kami tindak lanjuti.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+          <button type="button" style="font-size:12px;font-weight:600;border:1.5px solid #cfd8d4;background:#fff;color:#0f2a2e;padding:6px 14px;border-radius:999px;cursor:pointer">Pakai template</button>
+          <button type="button" style="font-size:12px;font-weight:600;border:1.5px solid #cfd8d4;background:#fff;color:#0f2a2e;padding:6px 14px;border-radius:999px;cursor:pointer">Saran AI</button>
+        </div>
+        <button type="button" style="width:100%;font-size:13px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:11px;border-radius:999px;cursor:pointer">Setujui &amp; kirim balasan</button>
+        <p style="margin:10px 0 0;font-size:12px;color:#5b7074;text-align:center">Saran AI selalu disetujui manusia sebelum dikirim.</p>
+      </div>
+      <div style="background:#fff7e2;border:1px solid #f0dca0;color:#6c5513;border-radius:18px;padding:14px 16px;font-size:12.5px"><div style="font-weight:700;margin-bottom:4px">Aturan privasi balasan</div>Balasan tidak menyebut layanan atau kondisi, dan tidak mengonfirmasi bahwa penulis adalah pasien. Gunakan kalimat umum.</div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const on = 'padding:10px 14px;border-radius:12px;background:#0f766e;color:#fff;font-weight:600;';
+    const off = 'padding:10px 14px;';
+    const names = ['Janji hari ini', 'Jadwal & slot', 'Dokter & cuti', 'Pengingat', 'Ulasan Google', 'Laporan', 'Pengguna & log audit'];
+    const nav = names.map((n) => ({ label: n, css: n === 'Ulasan Google' ? on : off }));
+    const chipBase = 'display:inline-block;font-size:12px;font-weight:600;padding:3px 12px;border-radius:999px;';
+    const CH = {
+      'belum dibalas': chipBase + 'background:#fff1d0;color:#6c4a00;',
+      'terlambat': chipBase + 'background:#fde0dc;color:#8a1c12;',
+      'dibalas': chipBase + 'background:#dcf2dd;color:#14532d;'
+    };
+    const raw = [
+      ['Hadi P.', 2, 'Barat', 'Menunggu agak lama di ruang tunggu.', '2 jam lalu', 'Batas balas: 46 jam lagi', 'Rudi H.', 'belum dibalas'],
+      ['Sinta M.', 5, 'Pusat Kota', 'Stafnya ramah dan informasinya jelas.', '1 hari lalu', 'Batas balas: 22 jam lagi', 'Sari W.', 'belum dibalas'],
+      ['Eka L.', 4, 'Timur', 'Lokasi mudah dijangkau dan parkirnya luas.', '1 hari lalu', 'Batas balas: 20 jam lagi', 'Tika S.', 'belum dibalas'],
+      ['Joko T.', 3, 'Pusat Kota', 'Jadwal sempat bergeser dari yang dikonfirmasi.', '3 hari lalu', 'Batas balas: terlewat 24 jam', 'Sari W.', 'terlambat'],
+      ['Nita R.', 5, 'Timur', 'Proses pendaftaran cepat dan tertata.', '4 hari lalu', 'Dibalas 5 Okt', 'Tika S.', 'dibalas'],
+      ['Agus D.', 5, 'Barat', 'Ruang tunggunya nyaman.', '5 hari lalu', 'Dibalas 4 Okt', 'Rudi H.', 'dibalas'],
+      ['Wulan K.', 4, 'Pusat Kota', 'Admin cepat membalas di WhatsApp.', '6 hari lalu', 'Dibalas 3 Okt', 'Sari W.', 'dibalas']
+    ];
+    const reviews = raw.map((r) => ({
+      who: r[0], stars: '★'.repeat(r[1]) + '☆'.repeat(5 - r[1]), starLabel: r[1] + ' dari 5 bintang',
+      branch: r[2], text: r[3], when: r[4], deadline: r[5], pic: r[6], status: r[7], chip: CH[r[7]],
+      rowCss: 'padding:16px 22px;border-top:1px solid #efece3;' + (r[7] === 'dibalas' ? '' : (r[7] === 'terlambat' ? 'background:#fff8f6;' : 'background:#fffdf5;'))
+    }));
+    const avg = raw.reduce((a, r) => a + r[1], 0) / raw.length;
+    return {
+      nav: nav,
+      reviews: reviews,
+      stats: [
+        { label: 'Belum dibalas', value: String(raw.filter((r) => r[7] === 'belum dibalas').length), color: '#8a5a00' },
+        { label: 'Terlambat (> 48 jam)', value: String(raw.filter((r) => r[7] === 'terlambat').length), color: '#8a1c12' },
+        { label: 'Sudah dibalas', value: String(raw.filter((r) => r[7] === 'dibalas').length), color: '#14532d' },
+        { label: 'Rata-rata bintang (contoh)', value: avg.toFixed(1).replace('.', ','), color: '#0f2a2e' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

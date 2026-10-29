@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Konten pengumuman dan artikel Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button,textarea,input,select{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f1efe8;color:#0f2a2e;line-height:1.5;min-height:1100px;display:flex;flex-wrap:wrap">
+
+<div style="flex:0 0 250px;max-width:100%;box-sizing:border-box;background:#0f2a2e;color:#b9d1cd;padding:24px 18px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;align-items:center;gap:10px;color:#fff">
+    <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="19" height="19" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8fb0aa;font-weight:600">Konten website</div></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:2px;font-size:14px;font-weight:500">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4"><a href="#" style="{{ n.css }}">{{ n.label }}</a></sc-for>
+  </div>
+  <a href="#" style="font-size:13px;color:#8fb0aa;padding:0 14px">← Panel operasional</a>
+  <div style="margin-top:auto;font-size:12px;color:#8fb0aa;border-top:1px solid rgba(255,255,255,.12);padding-top:14px"><div style="color:#fff;font-weight:600;font-size:13px">Drg. Pemilik</div>Pemilik · Semua cabang</div>
+</div>
+
+<div style="flex:1 1 700px;min-width:0;padding:28px 36px;box-sizing:border-box">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:24px">
+    <div>
+      <div style="font-size:13px;color:#5b7074">Banner beranda, halaman artikel, dan event edukasi</div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.15;margin:2px 0 0">Pengumuman &amp; artikel</h1>
+    </div>
+    <button type="button" style="font-size:13px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:10px 18px;border-radius:999px;cursor:pointer">Tulis konten baru</button>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start">
+    <div style="flex:1 1 340px;max-width:440px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:22px;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid #e3e0d5;display:flex;flex-wrap:wrap;gap:6px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button type="button" onClick="{{ t.pick }}" style="{{ t.css }}">{{ t.label }}</button></sc-for>
+      </div>
+      <sc-for list="{{ items }}" as="it" hint-placeholder-count="5">
+        <div style="{{ it.rowCss }}">
+          <div style="min-width:0;flex:1 1 0"><div style="font-weight:600;font-size:14px">{{ it.title }}</div><div style="font-size:12px;color:#5b7074">{{ it.meta }}</div></div>
+          <span style="{{ it.typeChip }}">{{ it.type }}</span>
+          <span style="{{ it.chip }}">{{ it.status }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:1 1 520px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:24px 26px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px">
+        <div style="font-family:'Fraunces',serif;font-size:22px">Pekan Edukasi Kesehatan Gigi</div>
+        <div style="font-size:12px;color:#5b7074">Belum pernah tayang</div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0;margin-bottom:22px;font-size:12.5px;font-weight:600">
+        <sc-for list="{{ steps }}" as="p" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:8px;flex:1 1 0;min-width:0"><span style="{{ p.dot }}">{{ p.n }}</span><span style="{{ p.txt }}">{{ p.label }}</span><span style="{{ p.line }}"></span></div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px">
+        <div style="flex:1 1 180px;min-width:0"><label for="pj" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Jenis</label>
+          <select id="pj" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e"><option>Event promo</option><option>Pengumuman</option><option>Artikel</option></select></div>
+        <div style="flex:2 1 260px;min-width:0"><label for="pt" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Judul</label>
+          <input id="pt" type="text" value="Pekan Edukasi Kesehatan Gigi" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e"></div>
+      </div>
+
+      <label for="pi" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Isi</label>
+      <textarea id="pi" rows="4" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e;resize:vertical;margin-bottom:14px">Pemeriksaan gigi dan edukasi cara menyikat gigi yang tepat untuk keluarga. Pendaftaran melalui WhatsApp atau reservasi online. Jumlah peserta terbatas per sesi.</textarea>
+
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px">
+        <div style="flex:1 1 150px;min-width:0"><label for="pm" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Mulai tayang</label>
+          <input id="pm" type="text" value="3 Nov 2026" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e"></div>
+        <div style="flex:1 1 150px;min-width:0"><label for="ps" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Selesai tayang</label>
+          <input id="ps" type="text" value="9 Nov 2026" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e"></div>
+      </div>
+
+      <div style="font-size:12px;font-weight:600;color:#5b7074;margin-bottom:8px">Tampil di</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+        <span style="font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:#d8f3ec;color:#0b5a53">Banner beranda</span>
+        <span style="font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:#d8f3ec;color:#0b5a53">Halaman artikel</span>
+        <span style="font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:#fff;color:#3a4f53;border:1.5px dashed #9fb3ae">Halaman cabang</span>
+      </div>
+      <div style="font-size:12px;font-weight:600;color:#5b7074;margin-bottom:8px">Berlaku di cabang</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+        <span style="font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:#d8f3ec;color:#0b5a53">Cabang Pusat Kota</span>
+        <span style="font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:#fff;color:#3a4f53;border:1.5px dashed #9fb3ae">Cabang Timur</span>
+        <span style="font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:#fff;color:#3a4f53;border:1.5px dashed #9fb3ae">Cabang Barat</span>
+      </div>
+
+      <div style="background:#fff7e2;border:1px solid #f0dca0;border-radius:14px;padding:14px 16px;font-size:12.5px;color:#6c5513;margin-bottom:18px">
+        <div style="font-weight:700;margin-bottom:4px">Aturan khusus event promo</div>
+        <ul style="margin:0;padding-left:18px;line-height:1.7">
+          <li>Jangan gunakan label diskon besar atau harga coret.</li>
+          <li>Hindari "terbaik", "termurah", "dijamin", dan klaim hasil perawatan.</li>
+          <li>Tonjolkan edukasi atau pemeriksaan, bukan potongan harga.</li>
+          <li>Wajib ditinjau dokter sebelum tayang.</li>
+        </ul>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
+        <div style="font-size:12px;color:#5b7074">Peninjau: drg. Anindya Prameswari</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button type="button" style="font-size:13px;font-weight:600;border:1.5px solid #cfd8d4;background:#fff;color:#0f2a2e;padding:9.5px 18px;border-radius:999px;cursor:pointer">Simpan draf</button>
+          <button type="button" style="font-size:13px;font-weight:600;border:1.5px solid #0f2a2e;background:transparent;color:#0f2a2e;padding:9.5px 18px;border-radius:999px;cursor:pointer">Pratinjau desktop &amp; mobile</button>
+          <button type="button" style="font-size:13px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:11px 20px;border-radius:999px;cursor:pointer">Ajukan tinjauan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const tab = st.tab || 'Semua';
+
+    const on = 'padding:10px 14px;border-radius:12px;background:#0f766e;color:#fff;font-weight:600;';
+    const off = 'padding:10px 14px;';
+    const nav = ['Layanan', 'Cabang', 'Profil dokter', 'Pengumuman & artikel'].map((n) => ({ label: n, css: n === 'Pengumuman & artikel' ? on : off }));
+
+    const tabNames = ['Semua', 'Pengumuman', 'Artikel', 'Event promo'];
+    const tabs = tabNames.map((t) => ({
+      label: t,
+      css: 'font-size:12.5px;font-weight:600;border:0;padding:7px 14px;border-radius:999px;cursor:pointer;' + (t === tab ? 'background:#0f766e;color:#fff;' : 'background:#f1efe8;color:#3a4f53;'),
+      pick: () => this.setState({ tab: t })
+    }));
+
+    const statusChip = {
+      'Tayang': 'background:#dcf2dd;color:#14532d;',
+      'Draf': 'background:#ece9df;color:#3a4f53;',
+      'Ditinjau': 'background:#fdecc8;color:#7a4b00;',
+      'Berakhir': 'background:#e6e8ea;color:#475569;'
+    };
+    const base = 'display:inline-block;flex:none;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;';
+    const ALL = [
+      ['Pekan Edukasi Kesehatan Gigi', 'Event promo', 'Draf', '3–9 Nov 2026 · Pusat Kota'],
+      ['Libur Natal: jam praktik cabang', 'Pengumuman', 'Ditinjau', '24–26 Des 2026 · Semua cabang'],
+      ['Cara menyikat gigi yang tepat', 'Artikel', 'Tayang', 'Tayang sejak 2 Okt 2026'],
+      ['Cabang Timur pindah ruang tunggu', 'Pengumuman', 'Tayang', '15–31 Okt 2026 · Timur'],
+      ['Kapan anak mulai periksa gigi?', 'Artikel', 'Draf', 'Terakhir diubah 27 Okt 2026'],
+      ['Edukasi gigi anak di sekolah', 'Event promo', 'Berakhir', '8–14 Sep 2026 · Timur']
+    ];
+    const rows = ALL.filter((r) => tab === 'Semua' || r[1] === tab);
+    const items = rows.map((r, i) => ({
+      title: r[0], type: r[1], status: r[2], meta: r[3],
+      chip: base + statusChip[r[2]],
+      typeChip: base + 'background:#fff;border:1px solid #e3e0d5;color:#3a4f53;',
+      rowCss: 'display:flex;gap:8px;align-items:center;padding:14px 20px;border-top:1px solid #efece3;' + (r[0] === 'Pekan Edukasi Kesehatan Gigi' ? 'background:#eaf8f4;border-left:4px solid #0f766e;padding-left:16px;' : '')
+    }));
+
+    const stepNames = ['Draf', 'Ditinjau', 'Tayang'];
+    const cur = 0;
+    const steps = stepNames.map((s, i) => ({
+      n: String(i + 1), label: s,
+      dot: 'flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;' + (i === cur ? 'background:#0f766e;color:#fff;' : (i < cur ? 'background:#0b5a53;color:#fff;' : 'background:#ece9df;color:#51656a;')),
+      txt: i === cur ? 'color:#0f2a2e;' : 'color:#5b7074;',
+      line: i < stepNames.length - 1 ? 'flex:1 1 20px;height:2px;background:' + (i < cur ? '#0b5a53' : '#e3e0d5') + ';margin:0 8px;' : 'display:none;'
+    }));
+
+    return { nav: nav, tabs: tabs, items: items, steps: steps };
+  }
+}
+</script>
+</body>
+</html>

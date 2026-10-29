@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Masuk panel Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button,input{font-family:inherit}
+input:focus{outline:2px solid #14b8a6;outline-offset:1px}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f7f5ef;color:#0f2a2e;line-height:1.55;min-height:900px;display:flex;flex-wrap:wrap">
+
+<!-- panel kiri -->
+<div style="flex:1 1 520px;min-width:0;background:linear-gradient(150deg,#0c2f30,#0f2a2e 55%,#0f5f5a);color:#fff;padding:48px 56px;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;width:420px;height:420px;border-radius:50%;background:#14b8a6;filter:blur(90px);opacity:.22;right:-140px;bottom:-120px"></div>
+  <div style="position:relative;display:flex;align-items:center;gap:10px">
+    <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="21" height="21" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8fb0aa;font-weight:600">Panel klinik</div></div>
+  </div>
+  <div style="position:relative;margin:auto 0;padding:56px 0">
+    <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5eead4">Khusus staf klinik</div>
+    <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:46px;line-height:1.1;margin:12px 0 28px;max-width:460px">Masuk untuk mengelola janji dan konten.</h1>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:440px">
+      <sc-for list="{{ points }}" as="p" hint-placeholder-count="3">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <span style="flex:none;width:34px;height:34px;border-radius:11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5eead4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ p.d }}"></path></svg></span>
+          <div><div style="font-weight:600;font-size:15px">{{ p.title }}</div><div style="font-size:14px;color:#b9d1cd">{{ p.desc }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="position:relative;font-size:12.5px;color:#8fb0aa">Demo dengan data contoh. Tidak ada data pasien yang sebenarnya.</div>
+</div>
+
+<!-- panel kanan -->
+<div style="flex:1 1 480px;min-width:0;padding:40px 32px;display:flex;align-items:center;justify-content:center">
+  <div style="width:100%;max-width:420px">
+
+    <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <h2 style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.15;margin:0 0 6px">Masuk</h2>
+        <p style="margin:0 0 22px;color:#5b7074;font-size:14.5px">Gunakan akun yang diberikan pemilik klinik.</p>
+
+        <div style="background:#eaf8f4;border:1px solid #cdeee6;border-radius:16px;padding:14px 16px;margin-bottom:22px">
+          <div style="font-size:12px;font-weight:600;color:#0b5a53;margin-bottom:8px">Masuk cepat untuk demo, pilih peran</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ roles }}" as="r" hint-placeholder-count="4"><button type="button" onClick="{{ r.pick }}" style="{{ r.css }}">{{ r.label }}</button></sc-for>
+          </div>
+        </div>
+
+        <label for="em" style="display:block;font-size:12.5px;font-weight:600;color:#5b7074;margin-bottom:6px">Email</label>
+        <input id="em" type="email" value="{{ email }}" autocomplete="username" style="width:100%;padding:13px 16px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;font-size:15px;background:#fff;color:#0f2a2e;margin-bottom:16px">
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><label for="pw" style="font-size:12.5px;font-weight:600;color:#5b7074">Kata sandi</label><a href="#" style="font-size:12.5px;font-weight:600;color:#0f766e">Lupa kata sandi?</a></div>
+        <div style="position:relative;margin-bottom:16px">
+          <input id="pw" type="{{ pwType }}" value="rahasia123" autocomplete="current-password" style="width:100%;padding:13px 76px 13px 16px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;font-size:15px;background:#fff;color:#0f2a2e">
+          <button type="button" onClick="{{ togglePw }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:#f1efe8;color:#3a4f53;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer">{{ pwLabel }}</button>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center;font-size:13.5px;color:#3a4f53;margin-bottom:22px"><input id="ing" type="checkbox" style="width:17px;height:17px;margin:0;accent-color:#0f766e"><label for="ing">Ingat perangkat ini selama 30 hari</label></div>
+
+        <button type="button" onClick="{{ submit }}" style="width:100%;font-size:15px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:14px;border-radius:999px;cursor:pointer">Masuk</button>
+
+        <div style="margin-top:20px;background:#fff7e2;border:1px solid #f0dca0;border-radius:14px;padding:12px 14px;font-size:12.5px;color:#6c5513">Setiap aktivitas di panel tercatat di log audit. Jangan membagikan akun dengan orang lain.</div>
+        <div style="margin-top:20px;text-align:center;font-size:13px"><a href="#" style="color:#0f766e;font-weight:600">← Kembali ke website</a></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOtp }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="width:52px;height:52px;border-radius:16px;background:#d8f3ec;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg></div>
+        <h2 style="font-family:'Fraunces',serif;font-weight:500;font-size:32px;line-height:1.15;margin:0 0 6px">Verifikasi dua langkah</h2>
+        <p style="margin:0 0 22px;color:#5b7074;font-size:14.5px">Masukkan 6 digit kode dari aplikasi autentikator untuk {{ email }}.</p>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <sc-for list="{{ digits }}" as="g" hint-placeholder-count="6"><div style="flex:1 1 0;min-width:0;height:56px;border:1.5px solid #e3e0d5;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:24px">{{ g }}</div></sc-for>
+        </div>
+        <div style="font-size:12.5px;color:#5b7074;margin-bottom:22px">Kode berganti tiap 30 detik. Kehilangan perangkat? Hubungi pemilik klinik.</div>
+        <button type="button" onClick="{{ verify }}" style="width:100%;font-size:15px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:14px;border-radius:999px;cursor:pointer">Verifikasi dan masuk</button>
+        <div style="margin-top:18px;text-align:center"><button type="button" onClick="{{ back }}" style="border:0;background:transparent;color:#0f766e;font-weight:600;font-size:13.5px;cursor:pointer">← Gunakan akun lain</button></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#d8f3ec;display:flex;align-items:center;justify-content:center;margin:0 auto 18px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg></div>
+        <h2 style="font-family:'Fraunces',serif;font-weight:500;font-size:32px;line-height:1.15;margin:0 0 6px">Berhasil masuk</h2>
+        <p style="margin:0 0 6px;color:#5b7074;font-size:14.5px">{{ roleLabel }} · {{ scope }}</p>
+        <p style="margin:0 0 24px;color:#5b7074;font-size:13.5px">Anda akan diarahkan ke {{ landing }}.</p>
+        <div style="background:#fff;border:1px solid #e3e0d5;border-radius:16px;padding:14px 16px;text-align:left;font-size:13px;margin-bottom:22px">
+          <div style="font-weight:600;margin-bottom:2px">Tercatat di log audit</div>
+          <div style="color:#5b7074">Masuk · Kamis 29 Oktober 2026, 20.16 · Perangkat baru</div>
+        </div>
+        <button type="button" onClick="{{ back }}" style="width:100%;font-size:15px;font-weight:600;border:1.5px solid #0f2a2e;background:transparent;color:#0f2a2e;padding:12.5px;border-radius:999px;cursor:pointer">Keluar dan ulangi demo</button>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const ri = st.role != null ? st.role : 0;
+    const step = st.step || 'form';
+    const showPw = !!st.showPw;
+
+    const R = [
+      { label: 'Pemilik', email: 'pemilik@arunika.example', mfa: true, scope: 'Semua cabang', landing: 'Laporan' },
+      { label: 'Admin cabang', email: 'rudi@arunika.example', mfa: false, scope: 'Cabang Pusat Kota', landing: 'Janji hari ini' },
+      { label: 'Resepsionis', email: 'sari@arunika.example', mfa: false, scope: 'Cabang Pusat Kota', landing: 'Janji hari ini' },
+      { label: 'Peninjau (dokter)', email: 'anindya@arunika.example', mfa: true, scope: 'Semua cabang', landing: 'Antrean tinjauan konten' }
+    ];
+    const cur = R[ri];
+
+    const base = 'font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;';
+    const roles = R.map((r, i) => ({
+      label: r.label,
+      css: base + (i === ri ? 'border:1.5px solid #0f766e;background:#0f766e;color:#fff;' : 'border:1.5px solid #cdeee6;background:#fff;color:#0b5a53;'),
+      pick: () => this.setState({ role: i })
+    }));
+
+    return {
+      points: [
+        { d: 'M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM5 21c0-4 3-6 7-6s7 2 7 6', title: 'Akses sesuai peran', desc: 'Admin cabang hanya melihat data cabangnya sendiri.' },
+        { d: 'M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z', title: 'Verifikasi dua langkah', desc: 'Wajib untuk pemilik dan peninjau konten.' },
+        { d: 'M5 4h14v16H5zM9 9h6M9 13h6', title: 'Aktivitas tercatat', desc: 'Log audit hanya memuat nomor janji, bukan nama atau nomor pasien.' }
+      ],
+      isForm: step === 'form',
+      isOtp: step === 'otp',
+      isDone: step === 'done',
+      roles: roles,
+      email: cur.email,
+      pwType: showPw ? 'text' : 'password',
+      pwLabel: showPw ? 'Sembunyikan' : 'Tampilkan',
+      togglePw: () => this.setState({ showPw: !showPw }),
+      submit: () => this.setState({ step: cur.mfa ? 'otp' : 'done' }),
+      verify: () => this.setState({ step: 'done' }),
+      back: () => this.setState({ step: 'form' }),
+      digits: ['4', '8', '1', '7', '0', '2'],
+      roleLabel: cur.label,
+      scope: cur.scope,
+      landing: cur.landing
+    };
+  }
+}
+</script>
+</body>
+</html>

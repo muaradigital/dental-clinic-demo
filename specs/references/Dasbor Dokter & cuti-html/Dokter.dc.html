@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Dokter dan cuti Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f1efe8;color:#0f2a2e;line-height:1.5;min-height:1000px;display:flex;flex-wrap:wrap">
+
+<div style="flex:0 0 250px;max-width:100%;box-sizing:border-box;background:#0f2a2e;color:#b9d1cd;padding:24px 18px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;align-items:center;gap:10px;color:#fff">
+    <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="19" height="19" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8fb0aa;font-weight:600">Panel klinik</div></div>
+  </div>
+  <div>
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8fb0aa;font-weight:600;margin-bottom:8px">Cabang aktif</div>
+    <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 14px;color:#fff;font-size:14px;font-weight:600">Semua cabang</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:2px;font-size:14px;font-weight:500">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="#" style="{{ n.css }}">{{ n.label }}</a></sc-for>
+  </div>
+  <div style="margin-top:auto;font-size:12px;color:#8fb0aa;border-top:1px solid rgba(255,255,255,.12);padding-top:14px"><div style="color:#fff;font-weight:600;font-size:13px">Drg. Pemilik</div>Pemilik · Semua cabang</div>
+</div>
+
+<div style="flex:1 1 700px;min-width:0;padding:28px 36px;box-sizing:border-box">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:24px">
+    <div>
+      <div style="font-size:13px;color:#5b7074">4 dokter · 3 cabang</div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.15;margin:2px 0 0">Dokter &amp; cuti</h1>
+    </div>
+    <button type="button" style="font-size:13px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:10px 18px;border-radius:999px;cursor:pointer">Tambah dokter</button>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start">
+    <div style="flex:1 1 640px;min-width:0;display:flex;flex-direction:column;gap:22px">
+
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:4px">Jadwal praktik mingguan</div>
+        <div style="font-size:12px;color:#5b7074;margin-bottom:16px">PK = Pusat Kota · TM = Timur · BR = Barat. Perubahan tampil di website dalam hitungan menit.</div>
+        <div style="overflow-x:auto"><div style="min-width:580px">
+          <div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:0 0 190px"></div>
+            <sc-for list="{{ heads }}" as="h" hint-placeholder-count="6"><div style="flex:1 1 0;min-width:0;text-align:center;font-size:12px;font-weight:600;color:#5b7074">{{ h }}</div></sc-for>
+          </div>
+          <sc-for list="{{ doctors }}" as="d" hint-placeholder-count="4">
+            <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center">
+              <div style="flex:0 0 190px;min-width:0;display:flex;gap:10px;align-items:center"><div style="flex:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:14px;color:#fff;background:linear-gradient(135deg,{{ d.c1 }},{{ d.c2 }})">{{ d.ini }}</div><div style="min-width:0"><div style="font-size:13px;font-weight:600;line-height:1.25">{{ d.name }}</div><div style="font-size:11px;color:#5b7074">{{ d.role }}</div></div></div>
+              <sc-for list="{{ d.cells }}" as="c" hint-placeholder-count="6"><div style="{{ c.css }}">{{ c.txt }}</div></sc-for>
+            </div>
+          </sc-for>
+        </div></div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;overflow:hidden">
+        <div style="padding:18px 22px;border-bottom:1px solid #e3e0d5;font-family:'Fraunces',serif;font-size:19px">Daftar cuti</div>
+        <sc-for list="{{ leaves }}" as="l" hint-placeholder-count="3">
+          <div style="display:flex;flex-wrap:wrap;gap:12px;padding:14px 22px;border-top:1px solid #efece3;align-items:center;font-size:13.5px">
+            <div style="flex:1 1 200px;min-width:0"><div style="font-weight:600">{{ l.name }}</div><div style="font-size:12px;color:#5b7074">{{ l.branch }}</div></div>
+            <div style="flex:1 1 170px;min-width:0"><div>{{ l.when }}</div><div style="font-size:12px;color:#5b7074">{{ l.reason }}</div></div>
+            <div style="flex:0 0 auto"><span style="{{ l.chip }}">{{ l.status }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="flex:1 1 280px;max-width:360px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:20px 22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:12px">Catat cuti</div>
+        <label for="cd" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Dokter</label>
+        <input id="cd" type="text" value="drg. Dimas Aryaputra" style="width:100%;box-sizing:border-box;padding:11px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e;margin-bottom:12px">
+        <div style="display:flex;gap:10px;margin-bottom:12px">
+          <div style="flex:1;min-width:0"><label for="c1" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Mulai</label><input id="c1" type="text" value="20 Nov 2026" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e"></div>
+          <div style="flex:1;min-width:0"><label for="c2" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Selesai</label><input id="c2" type="text" value="20 Nov 2026" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e"></div>
+        </div>
+        <label for="c3" style="display:block;font-size:12px;font-weight:600;color:#5b7074;margin-bottom:6px">Catatan administratif</label>
+        <input id="c3" type="text" value="Keperluan pribadi" style="width:100%;box-sizing:border-box;padding:11px 14px;border:1.5px solid #e3e0d5;border-radius:14px;font:inherit;background:#fbfaf6;color:#0f2a2e;margin-bottom:14px">
+        <button type="button" style="width:100%;font-size:13px;font-weight:600;border:0;background:#0f766e;color:#fff;padding:11px;border-radius:999px;cursor:pointer">Simpan cuti</button>
+      </div>
+      <div style="background:#fff7e2;border:1px solid #f0dca0;color:#6c5513;border-radius:18px;padding:14px 16px;font-size:12.5px"><div style="font-weight:700;margin-bottom:4px">Dampak cuti drg. Anindya, 2 – 4 Nov</div>12 slot ditutup otomatis di Pusat Kota dan Timur. 2 janji perlu dijadwal ulang.<button type="button" style="display:block;margin-top:10px;font-size:12px;font-weight:600;border:1.5px solid #6c5513;background:transparent;color:#6c5513;padding:6px 14px;border-radius:999px;cursor:pointer">Lihat janji terdampak</button></div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const on = 'padding:10px 14px;border-radius:12px;background:#0f766e;color:#fff;font-weight:600;';
+    const off = 'padding:10px 14px;';
+    const names = ['Janji hari ini', 'Jadwal & slot', 'Dokter & cuti', 'Pengingat', 'Ulasan Google', 'Laporan', 'Pengguna & log audit'];
+    const nav = names.map((n) => ({ label: n, css: n === 'Dokter & cuti' ? on : off }));
+    const cellBase = 'flex:1 1 0;min-width:0;text-align:center;padding:8px 0;border-radius:10px;font-size:12px;font-weight:700;';
+    const mk = (arr) => arr.map((v) => ({ txt: v || '–', css: cellBase + (v ? 'background:#d8f3ec;color:#0b5a53;' : 'background:#f3f1ea;color:#7d8c8f;font-weight:500;') }));
+    const chipBase = 'display:inline-block;font-size:12px;font-weight:600;padding:3px 12px;border-radius:999px;';
+    return {
+      nav: nav,
+      heads: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+      doctors: [
+        { ini: 'AP', name: 'drg. Anindya Prameswari', role: 'Dokter Gigi Umum', c1: '#0f766e', c2: '#14b8a6', cells: mk(['PK', '', 'TM', '', 'PK', '']) },
+        { ini: 'BS', name: 'drg. Bayu Santosa, Sp.Ort', role: 'Spesialis Ortodonti', c1: '#1e6f9f', c2: '#4cc2d9', cells: mk(['', 'PK', '', 'PK', '', 'PK']) },
+        { ini: 'CM', name: 'drg. Citra Maharani, Sp.KGA', role: 'Spesialis Gigi Anak', c1: '#9a6b2f', c2: '#e5b865', cells: mk(['TM', 'BR', '', 'TM', '', '']) },
+        { ini: 'DA', name: 'drg. Dimas Aryaputra', role: 'Dokter Gigi Umum', c1: '#6a4c93', c2: '#b79ced', cells: mk(['BR', 'BR', 'BR', 'BR', 'BR', 'BR']) }
+      ],
+      leaves: [
+        { name: 'drg. Anindya Prameswari', branch: 'Pusat Kota & Timur', when: '2 – 4 Nov 2026 (3 hari)', reason: 'Cuti tahunan', status: 'disetujui', chip: chipBase + 'background:#d8f3ec;color:#0b5a53;' },
+        { name: 'drg. Citra Maharani, Sp.KGA', branch: 'Timur & Barat', when: '9 Nov 2026 (1 hari)', reason: 'Seminar', status: 'menunggu', chip: chipBase + 'background:#fff1d0;color:#6c4a00;' },
+        { name: 'drg. Dimas Aryaputra', branch: 'Barat', when: '20 Nov 2026 (1 hari)', reason: 'Keperluan pribadi', status: 'draf', chip: chipBase + 'background:#ece9df;color:#4a5a5c;' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

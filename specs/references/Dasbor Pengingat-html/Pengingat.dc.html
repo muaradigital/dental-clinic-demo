@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Pengingat kunjungan Klinik Gigi Arunika</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f1efe8;color:#0f2a2e;line-height:1.5;min-height:1000px;display:flex;flex-wrap:wrap">
+
+<div style="flex:0 0 250px;max-width:100%;box-sizing:border-box;background:#0f2a2e;color:#b9d1cd;padding:24px 18px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;align-items:center;gap:10px;color:#fff">
+    <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center"><svg width="19" height="19" viewBox="0 0 200 200" aria-hidden="true"><path fill="#fff" d="M100 30C70 10 30 25 35 70c3 30 15 45 20 80 3 25 17 35 25 10 6-20 14-25 20-25s14 5 20 25c8 25 22 15 25-10 5-35 17-50 20-80 5-45-35-60-65-40z"></path></svg></div>
+    <div style="line-height:1.1"><div style="font-family:'Fraunces',serif;font-size:20px;font-weight:600">Arunika</div><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8fb0aa;font-weight:600">Panel klinik</div></div>
+  </div>
+  <div>
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8fb0aa;font-weight:600;margin-bottom:8px">Cabang aktif</div>
+    <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 14px;color:#fff;font-size:14px;font-weight:600">Pusat Kota</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:2px;font-size:14px;font-weight:500">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="#" style="{{ n.css }}">{{ n.label }}</a></sc-for>
+  </div>
+  <div style="margin-top:auto;font-size:12px;color:#8fb0aa;border-top:1px solid rgba(255,255,255,.12);padding-top:14px"><div style="color:#fff;font-weight:600;font-size:13px">Sari W.</div>Resepsionis · Pusat Kota</div>
+</div>
+
+<div style="flex:1 1 700px;min-width:0;padding:28px 36px;box-sizing:border-box">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:24px">
+    <div>
+      <div style="font-size:13px;color:#5b7074">Untuk janji Jumat, 30 Oktober 2026</div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1.15;margin:2px 0 0">Pengingat</h1>
+    </div>
+    <div style="display:inline-flex;background:#fff;border:1px solid #e3e0d5;border-radius:999px;padding:4px;font-size:13px;font-weight:600">
+      <span style="background:#0f766e;color:#fff;padding:7px 16px;border-radius:999px">Mode A · Manual</span>
+      <span style="color:#5b7074;padding:7px 16px">Mode B · Otomatis</span>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px">
+    <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+      <div style="flex:1 1 150px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:18px;padding:16px 18px">
+        <div style="font-size:12px;font-weight:600;color:#5b7074">{{ s.label }}</div>
+        <div style="font-family:'Fraunces',serif;font-size:34px;line-height:1.2;color:{{ s.color }}">{{ s.value }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start">
+    <div style="flex:1 1 620px;min-width:0;background:#fff;border:1px solid #e3e0d5;border-radius:22px;overflow:hidden">
+      <div style="padding:18px 22px;border-bottom:1px solid #e3e0d5;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+        <div style="font-family:'Fraunces',serif;font-size:19px">Pengingat H-1 · Pusat Kota</div>
+        <button type="button" style="font-size:12px;font-weight:600;border:1.5px solid #0f2a2e;background:transparent;color:#0f2a2e;padding:6px 14px;border-radius:999px;cursor:pointer">Kirim semua yang bisa dikirim</button>
+      </div>
+      <div style="overflow-x:auto"><div style="min-width:620px">
+        <div style="display:flex;gap:12px;padding:10px 22px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#5b7074;background:#faf9f4">
+          <div style="flex:0 0 52px">Jam</div><div style="flex:1 1 150px">Pasien</div><div style="flex:0 0 120px">Persetujuan</div><div style="flex:0 0 110px">Status</div><div style="flex:0 0 120px;text-align:right">Aksi</div>
+        </div>
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+          <div style="display:flex;gap:12px;padding:13px 22px;border-top:1px solid #efece3;align-items:center;font-size:13.5px">
+            <div style="flex:0 0 52px;font-weight:700">{{ r.time }}</div>
+            <div style="flex:1 1 150px;min-width:0"><div style="font-weight:600">{{ r.name }}</div><div style="font-size:12px;color:#5b7074">{{ r.phone }}</div></div>
+            <div style="flex:0 0 120px;font-size:12.5px;{{ r.consentCss }}">{{ r.consent }}</div>
+            <div style="flex:0 0 110px"><span style="{{ r.chip }}">{{ r.status }}</span></div>
+            <div style="flex:0 0 120px;text-align:right"><button type="button" disabled="{{ r.off }}" style="{{ r.btn }}">{{ r.action }}</button></div>
+          </div>
+        </sc-for>
+      </div></div>
+    </div>
+
+    <div style="flex:1 1 280px;max-width:360px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:20px 22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:12px">Isi pesan</div>
+        <div style="background:#e9f7ee;border:1px solid #cfe9d8;border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:13px;color:#15402a">Halo Rina, pengingat janji Anda di Klinik Gigi Arunika cabang Pusat Kota pada Jumat, 30 Oktober 2026 pukul 09.00. Untuk jadwal ulang atau batal: [tautan]</div>
+        <p style="margin:12px 0 0;font-size:12px;color:#5b7074">Pesan tidak menyebut layanan atau kondisi kesehatan. Pasien dapat berhenti menerima pengingat.</p>
+      </div>
+      <div style="background:#fff;border:1px solid #e3e0d5;border-radius:22px;padding:20px 22px">
+        <div style="font-family:'Fraunces',serif;font-size:19px;margin-bottom:8px">Pengaturan</div>
+        <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="3">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #efece3;font-size:13px">
+            <span>{{ t.label }}</span>
+            <button type="button" role="switch" aria-checked="{{ t.on }}" aria-label="{{ t.label }}" style="{{ t.track }}"><span style="{{ t.knob }}"></span></button>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#fff7e2;border:1px solid #f0dca0;color:#6c5513;border-radius:18px;padding:14px 16px;font-size:12.5px">Mode B memakai WhatsApp Business API: ada biaya per pesan, template harus disetujui Meta, dan persetujuan pasien wajib tercatat.</div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const on = 'padding:10px 14px;border-radius:12px;background:#0f766e;color:#fff;font-weight:600;';
+    const off = 'padding:10px 14px;';
+    const names = ['Janji hari ini', 'Jadwal & slot', 'Dokter & cuti', 'Pengingat', 'Ulasan Google', 'Laporan', 'Pengguna & log audit'];
+    const nav = names.map((n) => ({ label: n, css: n === 'Pengingat' ? on : off }));
+    const chipBase = 'display:inline-block;font-size:12px;font-weight:600;padding:3px 12px;border-radius:999px;';
+    const CH = {
+      'terkirim': chipBase + 'background:#dcf2dd;color:#14532d;',
+      'belum dikirim': chipBase + 'background:#fff1d0;color:#6c4a00;',
+      'tidak dikirim': chipBase + 'background:#ece9df;color:#4a5a5c;'
+    };
+    const raw = [
+      ['09.00', 'Rina A.', '0812-xxxx-3321', true, 'terkirim'],
+      ['09.00', 'Budi S.', '0857-xxxx-0912', true, 'terkirim'],
+      ['10.00', 'Maya P.', '0813-xxxx-7764', true, 'belum dikirim'],
+      ['11.00', 'Dewi K.', '0821-xxxx-1180', true, 'belum dikirim'],
+      ['13.00', 'Andi R.', '0878-xxxx-5503', false, 'tidak dikirim'],
+      ['14.00', 'Lia N.', '0896-xxxx-2047', true, 'belum dikirim'],
+      ['15.00', 'Tono W.', '0811-xxxx-9035', true, 'belum dikirim']
+    ];
+    const rows = raw.map((r) => {
+      const sent = r[4] === 'terkirim';
+      const noConsent = !r[3];
+      return {
+        time: r[0], name: r[1], phone: r[2],
+        consent: r[3] ? 'Setuju' : 'Tidak setuju',
+        consentCss: r[3] ? 'color:#0b5a53;font-weight:600;' : 'color:#8a1c12;font-weight:600;',
+        status: r[4], chip: CH[r[4]],
+        action: sent ? 'Kirim ulang' : 'Kirim',
+        off: noConsent,
+        btn: noConsent
+          ? 'font-size:12px;font-weight:600;background:#ece9df;color:#51656a;border:0;padding:7px 16px;border-radius:999px;cursor:not-allowed;'
+          : (sent
+            ? 'font-size:12px;font-weight:600;background:transparent;color:#0f2a2e;border:1.5px solid #cfd8d4;padding:5.5px 14px;border-radius:999px;cursor:pointer;'
+            : 'font-size:12px;font-weight:600;background:#0f766e;color:#fff;border:0;padding:7px 18px;border-radius:999px;cursor:pointer;')
+      };
+    });
+    const toggle = (label, isOn) => ({
+      label: label, on: isOn,
+      track: 'flex:none;width:42px;height:24px;border-radius:999px;border:0;padding:0;cursor:pointer;position:relative;background:' + (isOn ? '#0f766e' : '#cfd8d4') + ';',
+      knob: 'position:absolute;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;left:' + (isOn ? '21px' : '3px') + ';'
+    });
+    return {
+      nav: nav,
+      rows: rows,
+      stats: [
+        { label: 'Perlu dikirim', value: String(raw.filter((r) => r[3] && r[4] !== 'terkirim').length), color: '#8a5a00' },
+        { label: 'Sudah terkirim', value: String(raw.filter((r) => r[4] === 'terkirim').length), color: '#14532d' },
+        { label: 'Tidak bisa dikirim', value: String(raw.filter((r) => !r[3]).length), color: '#8a1c12' },
+        { label: 'Total janji besok', value: String(raw.length), color: '#0f2a2e' }
+      ],
+      toggles: [
+        toggle('Pengingat H-1', true),
+        toggle('Pengingat beberapa jam sebelum', false),
+        toggle('Sertakan tautan jadwal ulang', true)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

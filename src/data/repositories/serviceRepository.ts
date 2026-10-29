@@ -20,3 +20,7 @@ export function getServiceBySlug(slug: string): Service | undefined {
 export function getServicesByCategory(categoryId: string): Service[] {
   return services.filter((s) => s.categoryId === categoryId)
 }
+
+export function getServiceCategoryName(categoryId: string): string {
+  return serviceCategories.find((c) => c.id === categoryId)?.name ?? categoryId
+}

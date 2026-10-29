@@ -75,6 +75,21 @@ export function getNext7Days(from: Date = now()): Date[] {
   return Array.from({ length: 7 }, (_, i) => addDays(from, i))
 }
 
+/** "Hari ini" / "Kemarin" / "N hari lalu" relative to the system clock. */
+export function formatRelativeDay(iso: string, from: Date = now()): string {
+  const target = new Date(iso)
+  const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime()
+  const diffDays = Math.round((startOfDay(from) - startOfDay(target)) / 86_400_000)
+  if (diffDays <= 0) return 'Hari ini'
+  if (diffDays === 1) return 'Kemarin'
+  return `${diffDays} hari lalu`
+}
+
+/** "20.16" — 24-hour clock, dot separator, matching the clinic's time format throughout. */
+export function formatTimeID(date: Date): string {
+  return `${String(date.getHours()).padStart(2, '0')}.${String(date.getMinutes()).padStart(2, '0')}`
+}
+
 export function parseTimeToMinutes(time: string): number {
   const [h, m] = time.split('.').map(Number)
   return h * 60 + m

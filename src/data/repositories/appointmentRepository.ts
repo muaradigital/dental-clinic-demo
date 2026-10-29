@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { useDemoStore } from '@/store/useDemoStore'
 import type { Appointment, AppointmentExportRow, AppointmentStatus } from '@/types'
@@ -45,4 +46,18 @@ export function useAppointments(branchId?: string): Appointment[] {
   return useDemoStore(
     useShallow((s) => (branchId ? s.appointments.filter((a) => a.branchId === branchId) : s.appointments)),
   )
+}
+
+/** Reactive version of getTodayStats — re-renders as appointment statuses change. */
+export function useTodayStats(branchId: string | null, date: string) {
+  const appointments = useAppointments(branchId ?? undefined)
+  return useMemo(() => {
+    const today = appointments.filter((a) => a.date === date)
+    return {
+      total: today.length,
+      menungguKonfirmasi: today.filter((a) => a.status === 'baru').length,
+      hadir: today.filter((a) => a.status === 'hadir').length,
+      tidakHadir: today.filter((a) => a.status === 'tidak hadir').length,
+    }
+  }, [appointments, date])
 }

@@ -151,6 +151,7 @@ export const useDemoStore = create<DemoStoreState>()(
           activeBranchId: user.branchId ?? null,
           isAuthenticated: true,
         })
+        get().addAuditLog({ type: 'login', role: user.role }, user.id)
       },
       logout: () => set({ ...initialSession }),
 

@@ -1,6 +1,7 @@
 export type AppointmentStatus = 'baru' | 'dikonfirmasi' | 'hadir' | 'tidak hadir' | 'jadwal ulang'
 
-export type AppointmentSource = 'online' | 'telepon' | 'walk-in'
+/** Matches the "Sumber janji" categories used on both Janji hari ini and Laporan. */
+export type AppointmentSource = 'online' | 'gbp' | 'instagram' | 'lainnya'
 
 export interface Appointment {
   id: string

@@ -70,14 +70,38 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
     const el = ref.current
     if (!el || !isReady) return
 
+    const isInViewport = () => {
+      const rect = el.getBoundingClientRect()
+      return rect.top < window.innerHeight && rect.bottom > 0
+    }
+
+    // Already in view at mount — reveal immediately, no observer needed.
+    if (isInViewport()) {
+      setIsRevealed(true)
+      return
+    }
+
     const observer = getSharedObserver()
     if (!observer) return
 
     callbacks.set(el, () => setIsRevealed(true))
     observer.observe(el)
+
+    // Some full-page screenshot tools (Playwright's captureBeyondViewport
+    // included) rasterize past the real viewport without ever resizing it or
+    // firing a scroll/resize event — there is no DOM signal to key off for
+    // "a capture is about to happen." A capped fallback timer is the one
+    // guarantee that holds regardless of capture mechanism, as long as the
+    // capture happens a moment after load (true of any reasonable tool,
+    // including this project's own screenshot-after-settle verification
+    // step). This is what makes good on the hook's contract: content must
+    // never be stuck invisible "saat screenshot penuh halaman."
+    const fallbackTimer = window.setTimeout(() => setIsRevealed(true), 1500)
+
     return () => {
       observer.unobserve(el)
       callbacks.delete(el)
+      window.clearTimeout(fallbackTimer)
     }
   }, [isReady])
 

@@ -130,6 +130,67 @@ body {
   }
 }
 
+/* Ambient hero decoration — pure transform/opacity loops, purely decorative,
+   all killed by the prefers-reduced-motion block below. */
+@keyframes hero-drift {
+  to {
+    transform: translate(40px, 30px) scale(1.12);
+  }
+}
+@keyframes hero-float {
+  50% {
+    transform: translateY(-18px) rotate(2deg);
+  }
+}
+@keyframes hero-chip-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes hero-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes hero-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes hero-twinkle {
+  50% {
+    transform: scale(1.5) rotate(45deg);
+    opacity: 0.4;
+  }
+}
+@keyframes hero-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes map-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.hero-underline {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: hero-draw 1.4s 0.8s forwards ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

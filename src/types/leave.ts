@@ -14,5 +14,7 @@ export interface LeaveRequest {
 
 export interface LeaveImpact {
   closedSlotCount: number
+  /** Every branch with at least one day fully closed by this leave, even if no appointment was booked there yet. */
+  closedBranchIds: string[]
   affectedAppointments: Appointment[]
 }

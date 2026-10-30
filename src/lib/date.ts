@@ -100,3 +100,27 @@ export function formatMinutesToTime(minutes: number): string {
   const m = minutes % 60
   return `${String(h).padStart(2, '0')}.${String(m).padStart(2, '0')}`
 }
+
+/** "2026-10" -> "Oktober 2026". */
+export function formatMonthID(monthKey: string): string {
+  const [year, month] = monthKey.split('-').map(Number)
+  return `${MONTH_NAMES[month - 1]} ${year}`
+}
+
+/** "2026-10" shifted by `delta` months, e.g. shiftMonth('2026-10', -1) -> '2026-09'. */
+export function shiftMonth(monthKey: string, delta: number): string {
+  const [year, month] = monthKey.split('-').map(Number)
+  const date = new Date(year, month - 1 + delta, 1)
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+}
+
+/** "25 Desember 2026" for a single day, or "16 – 18 November 2026" for a range. */
+export function formatDateRangeID(startISO: string, endISO: string): string {
+  if (startISO === endISO) return formatShortDateID(new Date(`${startISO}T00:00:00`))
+  const start = new Date(`${startISO}T00:00:00`)
+  const end = new Date(`${endISO}T00:00:00`)
+  if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+    return `${start.getDate()} – ${formatShortDateID(end)}`
+  }
+  return `${formatShortDateID(start)} – ${formatShortDateID(end)}`
+}

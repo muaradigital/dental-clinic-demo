@@ -11,8 +11,8 @@ export const doctors: Doctor[] = [
     avatarSeed: 'anindya-prameswari',
     schedule: [
       { weekday: 1, branchId: 'branch-pusat-kota' }, // Senin
-      { weekday: 3, branchId: 'branch-pusat-kota' }, // Rabu
-      { weekday: 5, branchId: 'branch-timur' }, // Jumat
+      { weekday: 3, branchId: 'branch-timur' }, // Rabu
+      { weekday: 5, branchId: 'branch-pusat-kota' }, // Jumat
     ],
   },
   {
@@ -39,8 +39,8 @@ export const doctors: Doctor[] = [
     avatarSeed: 'citra-maharani',
     schedule: [
       { weekday: 1, branchId: 'branch-timur' }, // Senin
-      { weekday: 2, branchId: 'branch-timur' }, // Selasa
-      { weekday: 4, branchId: 'branch-barat' }, // Kamis
+      { weekday: 2, branchId: 'branch-barat' }, // Selasa
+      { weekday: 4, branchId: 'branch-timur' }, // Kamis
     ],
   },
   {

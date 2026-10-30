@@ -63,6 +63,13 @@
   /* WhatsApp */
   --color-whatsapp: #1faa59;
 
+  /* Chart series (Laporan) — Pusat Kota reuses --color-teal; Timur/Barat and
+     the busy-hour sequential ramp need their own hues, lifted verbatim from
+     the design export so the report chart matches it exactly. */
+  --color-chart-timur: #1e6f9f;
+  --color-chart-barat: #d9902f;
+  --color-chart-busy-light: #7fcbbf;
+
   /* Radii */
   --radius-pill: 999px;
   --radius-card: 22px;

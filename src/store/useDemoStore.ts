@@ -118,7 +118,9 @@ const initialSession: SessionState = {
   rememberedRoles: [],
 }
 
-let appointmentCounter = 1040
+// Seed rows run through 1045 (see data/seed/appointments.ts) — the counter
+// starts past them so a newly created appointment never collides with a seed id.
+let appointmentCounter = 1045
 
 export const useDemoStore = create<DemoStoreState>()(
   persist(

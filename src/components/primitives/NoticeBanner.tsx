@@ -18,7 +18,8 @@ export function NoticeBanner({ tone = 'warning', title, children, className }: N
   return (
     <div className={cn('rounded-chip border px-3.5 py-2.5 text-xs', TONE_CLASSES[tone], className)} role="note">
       {title && <p className="mb-1 font-semibold">{title}</p>}
-      <p>{children}</p>
+      {/* div, not p — some callers (e.g. LeaveImpactCallout) nest a button/list in children, which <p> can't legally contain */}
+      <div>{children}</div>
     </div>
   )
 }

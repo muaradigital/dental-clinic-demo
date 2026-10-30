@@ -8,6 +8,8 @@ interface ContentItemBase {
   updatedBy: string
   reviewerId?: string
   reviewNote?: string
+  /** Set the first time this item reaches 'tayang' — undefined means it has never gone live, driving the editor's "Belum pernah tayang" vs "Versi tayang saat ini" meta line. */
+  firstPublishedAt?: string
 }
 
 export interface LayananContent extends ContentItemBase {
@@ -41,6 +43,8 @@ export interface PengumumanContent extends ContentItemBase {
   publishAt?: string
   expireAt?: string
   showAsHomepageBanner: boolean
+  /** "Tampil di Halaman cabang" is derived from branchIds.length > 0 rather than a separate flag. */
+  showOnArticlesPage: boolean
   branchIds: string[]
 }
 

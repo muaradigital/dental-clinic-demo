@@ -43,6 +43,14 @@ export function useContentByType(type: ContentType): ContentItem[] {
   return useDemoStore(useShallow((s) => s.content.filter((c) => c.type === type)))
 }
 
+export function useContentById(id: string | undefined): ContentItem | undefined {
+  return useDemoStore((s) => (id ? s.content.find((c) => c.id === id) : undefined))
+}
+
+export function useContentInReview(): ContentItem[] {
+  return useDemoStore(useShallow((s) => s.content.filter((c) => c.status === 'ditinjau')))
+}
+
 export function usePublishedHomepageBanner(): PengumumanContent | undefined {
   return useDemoStore((s) =>
     s.content.find(

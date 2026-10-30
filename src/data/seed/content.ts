@@ -24,6 +24,7 @@ const layananContent: ContentItem[] = services.map((service) => ({
   showPrice: false,
   updatedAt: BASE_UPDATED_AT,
   updatedBy: BASE_UPDATED_BY,
+  firstPublishedAt: BASE_UPDATED_AT,
 }))
 
 const cabangContent: ContentItem[] = branches.map((branch) => ({
@@ -35,6 +36,7 @@ const cabangContent: ContentItem[] = branches.map((branch) => ({
   status: 'tayang',
   updatedAt: BASE_UPDATED_AT,
   updatedBy: BASE_UPDATED_BY,
+  firstPublishedAt: BASE_UPDATED_AT,
 }))
 
 const dokterContent: ContentItem[] = doctors.map((doctor) => ({
@@ -47,6 +49,38 @@ const dokterContent: ContentItem[] = doctors.map((doctor) => ({
   showCredentialNumber: false,
   updatedAt: BASE_UPDATED_AT,
   updatedBy: BASE_UPDATED_BY,
+  firstPublishedAt: BASE_UPDATED_AT,
 }))
 
-export const content: ContentItem[] = [...layananContent, ...cabangContent, ...dokterContent]
+const nowISO = () => new Date().toISOString()
+const atHour = (daysFromNow: number, hour: number) => {
+  const d = new Date()
+  d.setDate(d.getDate() + daysFromNow)
+  d.setHours(hour, 0, 0, 0)
+  return d.toISOString()
+}
+
+/**
+ * Seeded as 'draf' so Slice 6's demo can push it Draf -> Ditinjau -> (4-point
+ * checklist) -> Tayang and prove the homepage banner appears afterward,
+ * rather than starting pre-published like the baseline items above.
+ */
+const pengumumanContent: ContentItem[] = [
+  {
+    id: 'content-pengumuman-pekan-edukasi',
+    type: 'pengumuman',
+    title: 'Pekan Edukasi Kesehatan Gigi',
+    announcementType: 'event_promo',
+    body: 'Pemeriksaan gigi dan edukasi cara menyikat gigi yang tepat untuk keluarga. Pendaftaran melalui WhatsApp atau reservasi online. Jumlah peserta terbatas per sesi.',
+    publishAt: atHour(5, 0),
+    expireAt: atHour(11, 23),
+    showAsHomepageBanner: true,
+    showOnArticlesPage: true,
+    branchIds: [branches[0].id],
+    status: 'draf',
+    updatedAt: nowISO(),
+    updatedBy: 'Rudi H.',
+  },
+]
+
+export const content: ContentItem[] = [...layananContent, ...cabangContent, ...dokterContent, ...pengumumanContent]

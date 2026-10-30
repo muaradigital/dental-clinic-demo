@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button } from '@/components/primitives'
+import { useClinicSettings } from '@/data/repositories/clinicRepository'
 import { useStickyHeader } from '@/hooks/useStickyHeader'
 import { cn } from '@/lib/cn'
 import { Logo } from './Logo'
 import { MobileMenu } from './MobileMenu'
 
-const NAV_LINKS = [
+const BASE_NAV_LINKS = [
   { to: '/', label: 'Beranda' },
   { to: '/layanan', label: 'Layanan' },
   { to: '/dokter', label: 'Dokter' },
@@ -17,6 +18,9 @@ const NAV_LINKS = [
 export function Header() {
   const isScrolled = useStickyHeader(20)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const clinic = useClinicSettings()
+  // "Satu lokasi" hides the Cabang nav item — its page/picker have nothing to show.
+  const NAV_LINKS = clinic.hasMultipleBranches ? BASE_NAV_LINKS : BASE_NAV_LINKS.filter((l) => l.to !== '/cabang')
 
   return (
     <header className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-400')}>

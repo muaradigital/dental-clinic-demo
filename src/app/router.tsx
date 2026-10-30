@@ -24,6 +24,7 @@ import { KontenCabang } from '@/pages/dashboard/content/KontenCabang'
 import { KontenDokter } from '@/pages/dashboard/content/KontenDokter'
 import { KontenPengumuman } from '@/pages/dashboard/content/KontenPengumuman'
 import { KontenPratinjau } from '@/pages/dashboard/content/KontenPratinjau'
+import { PratinjauQueue } from '@/pages/dashboard/content/PratinjauQueue'
 import { RequireRole } from './RequireRole'
 import { ScrollRestoration } from './ScrollRestoration'
 import { DashboardIndexRedirect } from './DashboardIndexRedirect'
@@ -155,6 +156,14 @@ export const router = createBrowserRouter([
             element: (
               <RequireRole nav={{ mode: 'content', key: 'pengumuman' }}>
                 <KontenPengumuman />
+              </RequireRole>
+            ),
+          },
+          {
+            path: 'pratinjau',
+            element: (
+              <RequireRole nav={{ mode: 'content', key: 'pratinjau' }}>
+                <PratinjauQueue />
               </RequireRole>
             ),
           },

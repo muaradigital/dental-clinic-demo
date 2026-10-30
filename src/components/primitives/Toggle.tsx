@@ -7,9 +7,11 @@ export interface ToggleProps {
   description?: string
   disabled?: boolean
   id?: string
+  /** Accessible name for toggles with no visible label text (e.g. an inline table-row switch). */
+  ariaLabel?: string
 }
 
-export function Toggle({ checked, onChange, label, description, disabled, id }: ToggleProps) {
+export function Toggle({ checked, onChange, label, description, disabled, id, ariaLabel }: ToggleProps) {
   return (
     <div className="flex items-start justify-between gap-4">
       {(label || description) && (
@@ -27,6 +29,7 @@ export function Toggle({ checked, onChange, label, description, disabled, id }: 
         type="button"
         role="switch"
         aria-checked={checked}
+        aria-label={ariaLabel ?? label}
         disabled={disabled}
         onClick={() => onChange(!checked)}
         className={cn(

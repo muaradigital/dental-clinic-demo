@@ -1,4 +1,5 @@
 import { Section, Button } from '@/components/primitives'
+import { AnnouncementBanner } from '@/components/public/AnnouncementBanner'
 import { BranchCard } from '@/components/public/BranchCard'
 import { CtaBanner } from '@/components/public/CtaBanner'
 import { DoctorCard } from '@/components/public/DoctorCard'
@@ -7,6 +8,8 @@ import { Icon } from '@/components/public/icons'
 import { ServiceCard } from '@/components/public/ServiceCard'
 import { VisitStepCard } from '@/components/public/VisitStepCard'
 import { useBranches, useVisibleBranches } from '@/data/repositories/branchRepository'
+import { useClinicSettings } from '@/data/repositories/clinicRepository'
+import { usePublishedHomepageBanner } from '@/data/repositories/contentRepository'
 import { getDoctors } from '@/data/repositories/doctorRepository'
 import { getServiceCategories, getServices } from '@/data/repositories/serviceRepository'
 import {
@@ -25,12 +28,16 @@ const STAGGER: (0 | 100 | 200 | 300)[] = [0, 100, 200, 300]
 export function Beranda() {
   const allBranches = useBranches()
   const visibleBranches = useVisibleBranches()
+  const clinic = useClinicSettings()
+  const banner = usePublishedHomepageBanner()
   const services = getServices()
   const serviceCategories = getServiceCategories()
   const doctors = getDoctors()
 
   return (
     <>
+      {banner && <AnnouncementBanner announcement={banner} />}
+
       <section className="relative overflow-hidden px-5 pb-16 pt-6 md:px-10">
         <HeroBlobs />
         <div className="relative mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
@@ -90,6 +97,15 @@ export function Beranda() {
             {visibleBranches.map((branch, i) => (
               <BranchCard key={branch.id} branch={branch} delay={STAGGER[i % STAGGER.length]} />
             ))}
+          </div>
+        </Section>
+      )}
+
+      {!clinic.hasMultipleBranches && clinic.singleLocationAddress && (
+        <Section eyebrow="Lokasi klinik" title="Kunjungi klinik kami" background="ivory">
+          <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center">
+            <p className="text-base text-ink">{clinic.singleLocationAddress.address}</p>
+            <p className="text-sm text-muted">WhatsApp {clinic.singleLocationAddress.whatsappNumber}</p>
           </div>
         </Section>
       )}

@@ -90,6 +90,13 @@ export function formatTimeID(date: Date): string {
   return `${String(date.getHours()).padStart(2, '0')}.${String(date.getMinutes()).padStart(2, '0')}`
 }
 
+/** "27 Okt 14.10" — short date + time, the "Terakhir diubah" / submission-attribution format. */
+export function formatDateTimeID(date: Date): string {
+  const day = date.getDate()
+  const month = MONTH_NAMES[date.getMonth()].slice(0, 3)
+  return `${day} ${month} ${formatTimeID(date)}`
+}
+
 export function parseTimeToMinutes(time: string): number {
   const [h, m] = time.split('.').map(Number)
   return h * 60 + m

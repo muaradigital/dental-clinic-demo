@@ -20,8 +20,21 @@ export function getBranchById(id: string): Branch | undefined {
   return useDemoStore.getState().branches.find((b) => b.id === id)
 }
 
+/**
+ * The implicit "one location" used internally for scheduling/slots when
+ * `ClinicSettings.hasMultipleBranches` is false — the branch picker UI is
+ * hidden, but its practice hours still drive the public booking flow.
+ */
+export function getPrimaryBranch(): Branch | undefined {
+  return useDemoStore.getState().branches[0]
+}
+
 export function setBranchVisibility(branchId: string, visible: boolean): void {
   useDemoStore.getState().setBranchVisibility(branchId, visible)
+}
+
+export function updateBranch(branchId: string, patch: Partial<Pick<Branch, 'name' | 'address' | 'whatsappNumber'>>): void {
+  useDemoStore.getState().updateBranch(branchId, patch)
 }
 
 export function useBranches(): Branch[] {

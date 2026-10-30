@@ -9,7 +9,8 @@ import { DatePicker7Day } from '@/components/reservation/DatePicker7Day'
 import { ServiceCategoryPicker } from '@/components/reservation/ServiceCategoryPicker'
 import { SlotGrid } from '@/components/reservation/SlotGrid'
 import { SummaryPanel } from '@/components/reservation/SummaryPanel'
-import { useVisibleBranches } from '@/data/repositories/branchRepository'
+import { getPrimaryBranch, useVisibleBranches } from '@/data/repositories/branchRepository'
+import { useClinicSettings } from '@/data/repositories/clinicRepository'
 import { createAppointment } from '@/data/repositories/appointmentRepository'
 import { isDateClosedForBranch } from '@/data/repositories/scheduleRepository'
 import { getServiceCategories } from '@/data/repositories/serviceRepository'
@@ -30,7 +31,12 @@ function StepHeader({ number, title }: { number: number; title: string }) {
 }
 
 export function Reservasi() {
-  const branches = useVisibleBranches()
+  const clinic = useClinicSettings()
+  const visibleBranches = useVisibleBranches()
+  // "Satu lokasi" hides the picker, but a branch's PracticeHours still has
+  // to drive the slot grid — the first branch stands in silently for it.
+  const primaryBranch = getPrimaryBranch()
+  const branches = clinic.hasMultipleBranches ? visibleBranches : primaryBranch ? [primaryBranch] : []
   const categories = getServiceCategories()
   const dates = getNext7Days(now())
 
@@ -121,7 +127,16 @@ export function Reservasi() {
             className={cn(step1RevealProps.className, 'rounded-card-lg border border-border bg-surface p-7')}
           >
             <StepHeader number={1} title="Cabang dan layanan" />
-            <BranchPicker branches={branches} selectedId={branchId} onSelect={handleSelectBranch} />
+            {clinic.hasMultipleBranches ? (
+              <BranchPicker branches={branches} selectedId={branchId} onSelect={handleSelectBranch} />
+            ) : (
+              clinic.singleLocationAddress && (
+                <div className="mb-5 rounded-chip border border-border bg-ivory-input px-4 py-3 text-sm">
+                  <p className="font-semibold text-ink">{clinic.singleLocationAddress.address}</p>
+                  <p className="mt-1 text-muted">WhatsApp {clinic.singleLocationAddress.whatsappNumber}</p>
+                </div>
+              )
+            )}
             <ServiceCategoryPicker categories={categories} selectedId={categoryId} onSelect={setCategoryId} />
           </div>
 

@@ -12,6 +12,13 @@ export const clinicSettings: ClinicSettings = {
   name: 'Klinik Gigi Arunika',
   tagline: 'Klinik Gigi',
   hasMultipleBranches: true,
+  // Populated up front so flipping to "Satu lokasi" always has a real
+  // address to show — defaults to the Pusat Kota branch's own contact
+  // details, a reasonable stand-in for "if this clinic were one location."
+  singleLocationAddress: {
+    address: `Jl. Contoh Raya No. 12, Kecamatan Tengah, ${CITY_NAME}`,
+    whatsappNumber: '+62 812-0000-0001',
+  },
   doctorReviewEnabled: true,
   whatsappNumber: '+62 812-0000-0001',
   // The design export's consent checkbox left "[12]" as a bracketed

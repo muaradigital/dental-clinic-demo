@@ -15,4 +15,5 @@ export const CONTENT_NAV_ITEMS: { key: ContentNavKey; label: string; to: string 
   { key: 'cabang', label: 'Cabang', to: '/dasbor/konten/cabang' },
   { key: 'dokter', label: 'Profil dokter', to: '/dasbor/konten/dokter' },
   { key: 'pengumuman', label: 'Pengumuman & artikel', to: '/dasbor/konten/pengumuman' },
+  { key: 'pratinjau', label: 'Pratinjau & tinjauan', to: '/dasbor/konten/pratinjau' },
 ]

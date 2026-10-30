@@ -32,11 +32,19 @@ export function Footer({ condensed }: FooterProps) {
                 { to: '/tentang', label: 'Tentang & FAQ' },
               ]}
             />
-            {clinic.hasMultipleBranches && (
+            {clinic.hasMultipleBranches ? (
               <FooterColumn
                 title="Cabang"
                 links={branches.map((b) => ({ to: `/cabang/${b.slug}`, label: b.name.replace('Cabang ', '') }))}
               />
+            ) : (
+              clinic.singleLocationAddress && (
+                <div>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-on-dark-muted">Kontak</p>
+                  <p className="text-sm text-on-dark">{clinic.singleLocationAddress.address}</p>
+                  <p className="mt-2 text-sm text-on-dark">{clinic.singleLocationAddress.whatsappNumber}</p>
+                </div>
+              )
             )}
             <FooterColumn title="Legal" links={[{ to: '/privasi', label: 'Kebijakan privasi' }]} />
           </div>

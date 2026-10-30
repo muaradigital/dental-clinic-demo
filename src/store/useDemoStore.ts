@@ -82,6 +82,7 @@ interface DemoStoreState extends SessionState {
 
   updateClinicSettings: (patch: Partial<ClinicSettings>) => void
   setBranchVisibility: (branchId: string, visible: boolean) => void
+  updateBranch: (branchId: string, patch: Partial<Pick<Branch, 'name' | 'address' | 'whatsappNumber'>>) => void
 
   createAppointment: (input: Omit<Appointment, 'id' | 'appointmentNumber' | 'createdAt'>) => Appointment
   updateAppointmentStatus: (id: string, status: AppointmentStatus, actorUserId: string) => void
@@ -162,6 +163,10 @@ export const useDemoStore = create<DemoStoreState>()(
         set((s) => ({
           branches: s.branches.map((b) => (b.id === branchId ? { ...b, isVisible: visible } : b)),
         })),
+      updateBranch: (branchId, patch) =>
+        set((s) => ({
+          branches: s.branches.map((b) => (b.id === branchId ? { ...b, ...patch } : b)),
+        })),
 
       createAppointment: (input) => {
         appointmentCounter += 1
@@ -188,8 +193,15 @@ export const useDemoStore = create<DemoStoreState>()(
         )
       },
 
-      saveContentDraft: (id, patch) =>
-        set((s) => ({ content: s.content.map((c) => (c.id === id ? ({ ...c, ...patch } as ContentItem) : c)) })),
+      // Only stamps who/when — callers decide whether this save also moves
+      // status back to 'draf' (the explicit "Simpan draf" button does; a
+      // silent field-flush right before opening Pratinjau must NOT, or it
+      // would undo an "Ajukan tinjauan"/"Tayangkan" that just happened.
+      saveContentDraft: (id, patch) => {
+        const actorName = seedUsers.find((u) => u.id === get().activeUserId)?.name ?? 'Pengguna demo'
+        const stamped = { ...patch, updatedAt: new Date().toISOString(), updatedBy: actorName }
+        set((s) => ({ content: s.content.map((c) => (c.id === id ? ({ ...c, ...stamped } as ContentItem) : c)) }))
+      },
       submitContentForReview: (id) => {
         const item = get().content.find((c) => c.id === id)
         if (!item) return
@@ -208,15 +220,23 @@ export const useDemoStore = create<DemoStoreState>()(
       approveAndPublishContent: (id, reviewerId) => {
         const item = get().content.find((c) => c.id === id)
         if (!item) return
+        const now = new Date().toISOString()
         set((s) => ({
-          content: s.content.map((c) => (c.id === id ? { ...c, status: 'tayang', reviewerId } : c)),
+          content: s.content.map((c) =>
+            c.id === id ? { ...c, status: 'tayang', reviewerId, firstPublishedAt: c.firstPublishedAt ?? now } : c,
+          ),
         }))
         get().addAuditLog({ type: 'content_publish', contentTitle: item.title, contentType: item.type }, reviewerId)
       },
       publishContentDirect: (id) => {
         const item = get().content.find((c) => c.id === id)
         if (!item) return
-        set((s) => ({ content: s.content.map((c) => (c.id === id ? { ...c, status: 'tayang' } : c)) }))
+        const now = new Date().toISOString()
+        set((s) => ({
+          content: s.content.map((c) =>
+            c.id === id ? { ...c, status: 'tayang', firstPublishedAt: c.firstPublishedAt ?? now } : c,
+          ),
+        }))
         get().addAuditLog({ type: 'content_publish', contentTitle: item.title, contentType: item.type }, get().activeUserId ?? 'unknown')
       },
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/primitives'
 import { useReveal } from '@/hooks/useReveal'
 import { BranchPicker } from '@/components/reservation/BranchPicker'
@@ -39,8 +39,13 @@ export function Reservasi() {
   const branches = clinic.hasMultipleBranches ? visibleBranches : primaryBranch ? [primaryBranch] : []
   const categories = getServiceCategories()
   const dates = getNext7Days(now())
+  const [searchParams] = useSearchParams()
 
-  const [branchId, setBranchId] = useState<string | null>(branches[0]?.id ?? null)
+  const [branchId, setBranchId] = useState<string | null>(() => {
+    const preselected = searchParams.get('cabang')
+    const match = preselected && branches.find((b) => b.slug === preselected)
+    return (match || branches[0])?.id ?? null
+  })
   const [categoryId, setCategoryId] = useState<string | null>(categories[0]?.id ?? null)
   const [dateISO, setDateISO] = useState<string>(toISODate(now()))
   const [time, setTime] = useState<string | null>(null)

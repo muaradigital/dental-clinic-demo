@@ -38,7 +38,7 @@ export function Tabs<T extends string = string>({
             aria-selected={isActive}
             onClick={() => onChange(option.value)}
             className={cn(
-              'rounded-pill font-semibold transition-colors duration-300',
+              'rounded-pill font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal',
               size === 'sm' ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm',
               isActive ? 'bg-teal text-white' : 'bg-transparent text-muted hover:text-ink',
             )}

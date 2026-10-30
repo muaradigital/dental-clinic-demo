@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, NoticeBanner, StatusChip, Tabs, Toggle } from '@/components/primitives'
 import { useAuditLog } from '@/data/repositories/auditRepository'
 import { getBranchById } from '@/data/repositories/branchRepository'
 import { useClinicSettings, updateClinicSettings } from '@/data/repositories/clinicRepository'
+import { resetDemoData } from '@/data/repositories/metaRepository'
 import { getDesignatedReviewers, getRolePermissionMatrix, getUserById, getUsers } from '@/data/repositories/userRepository'
 import { formatLongDateID, formatRelativeDay, formatTimeID, now } from '@/lib/date'
 import { ROLE_CONFIG, ROLE_ORDER } from '@/lib/permissions'
@@ -24,6 +26,7 @@ const FILTER_OPTIONS: { value: 'Semua' | AuditCategory; label: string }[] = [
 ]
 
 export function PenggunaAudit() {
+  const navigate = useNavigate()
   const activeUserId = useDemoStore((s) => s.activeUserId)
   const addAuditLog = useDemoStore((s) => s.addAuditLog)
   const clinic = useClinicSettings()
@@ -34,6 +37,12 @@ export function PenggunaAudit() {
 
   const [filter, setFilter] = useState<'Semua' | AuditCategory>('Semua')
   const [showInviteNotice, setShowInviteNotice] = useState(false)
+  const [confirmingReset, setConfirmingReset] = useState(false)
+
+  function handleResetDemo() {
+    resetDemoData()
+    navigate('/masuk', { replace: true })
+  }
 
   const filteredLog = filter === 'Semua' ? auditLog : auditLog.filter((e) => AUDIT_CATEGORY[e.actionType] === filter)
 
@@ -233,6 +242,31 @@ export function PenggunaAudit() {
         <div className="border-t border-[#efece3] px-[22px] py-3 text-xs text-muted">
           Menampilkan sesi demo ini, {formatLongDateID(now())}. Log disimpan sesuai kebijakan retensi.
         </div>
+      </div>
+
+      <div className="mt-[22px] flex flex-wrap items-center justify-between gap-4 rounded-card border border-border bg-surface p-[22px]">
+        <div>
+          <p className="font-display text-lg">Reset data demo</p>
+          <p className="mt-1 text-xs text-muted">
+            Mengembalikan semua reservasi, konten, ulasan, pengingat, dan log audit ke keadaan awal, lalu keluar dari sesi
+            ini. Hanya memengaruhi data demo di perangkat ini.
+          </p>
+        </div>
+        {confirmingReset ? (
+          <div className="flex items-center gap-2.5">
+            <span className="text-xs font-semibold text-danger-text">Yakin? Ini tidak bisa dibatalkan.</span>
+            <Button variant="outline-light" size="sm" onClick={() => setConfirmingReset(false)}>
+              Batal
+            </Button>
+            <Button variant="danger-text" size="sm" onClick={handleResetDemo}>
+              Ya, reset sekarang
+            </Button>
+          </div>
+        ) : (
+          <Button variant="outline-light" size="sm" onClick={() => setConfirmingReset(true)}>
+            Reset data demo
+          </Button>
+        )}
       </div>
     </div>
   )

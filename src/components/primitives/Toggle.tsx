@@ -33,7 +33,7 @@ export function Toggle({ checked, onChange, label, description, disabled, id, ar
         disabled={disabled}
         onClick={() => onChange(!checked)}
         className={cn(
-          'relative h-6 w-[42px] shrink-0 rounded-pill transition-colors duration-300',
+          'relative h-6 w-[42px] shrink-0 rounded-pill transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal',
           checked ? 'bg-teal' : 'bg-border',
           disabled && 'cursor-not-allowed opacity-50',
         )}

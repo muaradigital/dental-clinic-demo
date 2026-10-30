@@ -198,6 +198,33 @@ body {
   animation: hero-draw 1.4s 0.8s forwards ease;
 }
 
+/* FAQ accordion — native <details>/<summary>, no JS. The "+" rotates into
+   an "×" on open via a pseudo-element, matching the mockup's mechanism. */
+.faq-item {
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.faq-item[open] {
+  border-color: var(--color-mint-2);
+  box-shadow: var(--shadow-card);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: '+';
+  transition: transform 0.3s;
+  font-weight: 400;
+}
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

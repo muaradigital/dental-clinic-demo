@@ -7,7 +7,7 @@ import { HeroArt, HeroBlobs } from '@/components/public/HeroDecor'
 import { Icon } from '@/components/public/icons'
 import { ServiceCard } from '@/components/public/ServiceCard'
 import { VisitStepCard } from '@/components/public/VisitStepCard'
-import { useBranches, useVisibleBranches } from '@/data/repositories/branchRepository'
+import { useVisibleBranches } from '@/data/repositories/branchRepository'
 import { useClinicSettings } from '@/data/repositories/clinicRepository'
 import { usePublishedHomepageBanner } from '@/data/repositories/contentRepository'
 import { getDoctors } from '@/data/repositories/doctorRepository'
@@ -26,7 +26,6 @@ import {
 const STAGGER: (0 | 100 | 200 | 300)[] = [0, 100, 200, 300]
 
 export function Beranda() {
-  const allBranches = useBranches()
   const visibleBranches = useVisibleBranches()
   const clinic = useClinicSettings()
   const banner = usePublishedHomepageBanner()
@@ -77,7 +76,7 @@ export function Beranda() {
               </Button>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <StatChip value={allBranches.length} label="cabang" />
+              {clinic.hasMultipleBranches && <StatChip value={visibleBranches.length} label="cabang" />}
               <StatChip value={doctors.length} label="dokter gigi" />
               <StatChip value={serviceCategories.length} label="kategori layanan" />
             </div>

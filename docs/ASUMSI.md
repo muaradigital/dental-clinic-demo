@@ -1,0 +1,52 @@
+# Asumsi dan keputusan implementasi
+
+Daftar ini memuat setiap tempat implementasi menyimpang dari referensi desain (`specs/references/`) atau mockup animasi (`specs/klinik-mockup.html`), beserta alasannya. Sesuai arahan di `specs/spec.md`: "Jika ada asumsi atau bagian yang tidak bisa dipenuhi, tulis di `docs/ASUMSI.md`."
+
+## Struktur & aksesibilitas
+
+- **Tabel dasbor dibangun ulang sebagai `<table>` semantik sungguhan**, bukan pola flex-div ("tabel palsu") yang dipakai di referensi — styling visual dipertahankan sama persis, hanya markup yang diganti, demi pembaca layar dan navigasi keyboard sesuai syarat aksesibilitas di spec.
+- **Peninjau ditambahkan sebagai kolom ke-4** pada tabel hak akses di halaman Pengguna & log audit. Referensi hanya menampilkan 3 kolom (Pemilik/Admin cabang/Resepsionis), tapi sistem peran di demo ini mencakup Peninjau — menambah kolom keempat mencegah tabel ini berbeda dari `ROLE_CONFIG` yang sesungguhnya menegakkan akses.
+- **Warna chip "peringatan" dikanonisasi** ke satu pasangan: `#fff1d0` / `#6c4a00`. Referensi memakai pasangan ini di sebagian layar tapi `#fdecc8` / `#7a4b00` di layar lain (warna sama secara konsep, beda hex) — satu pasangan dipilih agar sistem desain konsisten.
+- **Toggle, Tabs, dan pill switcher cabang punya focus ring teal eksplisit** (`focus-visible:outline-teal`) menyamai Button, bukan hanya mengandalkan outline bawaan browser — demi konsistensi visual dengan syarat "fokus keyboard terlihat."
+
+## Rute & halaman
+
+- **`/cabang` (halaman indeks cabang) ditambahkan** — tidak disebut eksplisit di daftar rute spec, tapi item nav "Cabang" butuh tujuan ketika diklik langsung (bukan lewat kartu cabang di Beranda).
+- **`/syarat` (syarat penggunaan) sengaja TIDAK ditambahkan** — ada di mockup lama, tapi di luar daftar halaman eksplisit spec ("Halaman Layanan, Dokter, Tentang & FAQ, Kebijakan privasi"). Menambahnya akan jadi fitur di luar permintaan.
+- **`/layanan`, `/dokter`, `/tentang`, `/privasi` tidak punya referensi desain export** — satu-satunya sumber adalah versi tema lama di `klinik-mockup.html` (`#/layanan`, `#/dokter`, `#/tentang`, `#/privasi`). Kontennya diporting apa adanya (sudah sesuai aturan kepatuhan) dan di-re-skin total ke token desain baru (teal/pasir/ivory), bukan tema lama (`--bg`, `--wa`, dst.). Verifikasi untuk keempat halaman ini bersifat self-consistency saja — tidak ada referensi piksel untuk dibandingkan.
+- **Halaman Cabang (`/cabang/:slug`) sempat jadi placeholder sampai potongan 7** meski punya referensi desain lengkap (`Halaman cabang-html`) — ini murni kelalaian urutan pengerjaan pada rencana awal (potongan 2 hanya menyebut "Beranda + animasi"), bukan keputusan desain. Diperbaiki di potongan 7 dengan tingkat kehati-hatian yang sama seperti Beranda, dibandingkan langsung terhadap referensinya.
+
+## Animasi
+
+- **`useReveal` default TERLIHAT, baru opt-in ke status tersembunyi** (kebalikan dari mockup yang default tersembunyi lalu JS menampilkannya) — aplikasi ini murni client-side rendering tanpa SSR/noscript fallback, jadi konten tidak boleh berisiko tersangkut tak terlihat jika JS gagal.
+- **`useReveal` punya fallback timer ±1.5 detik** yang memaksa elemen tampil meski `IntersectionObserver` belum sempat memicu — ditemukan perlu saat alat screenshot halaman penuh (mis. Playwright `fullPage`) merender area di luar viewport nyata tanpa pernah memicu event scroll/resize asli. Tanpa ini, bagian bawah halaman di layar sempit bisa tetap tersembunyi di screenshot — pelanggaran langsung terhadap syarat "animasi tidak boleh membuat konten tersembunyi ... saat screenshot penuh halaman."
+- **Pulsa radar penanda peta diimplementasikan ulang sebagai CSS `@keyframes`**, bukan SVG SMIL `<animate>` seperti di mockup — dukungan SMIL tidak konsisten antar-browser.
+- **CSS `.marquee` dari mockup tidak dihidupkan kembali** — dikonfirmasi lewat pencarian menyeluruh bahwa class ini tidak pernah benar-benar dipasang ke elemen manapun di mockup aslinya (kode mati, bukan fitur yang pernah tayang).
+- **Menu mobile mendapat morph ikon hamburger→X yang sungguhan** — mockup punya hook transisi CSS untuk ini tapi tidak pernah menulis aturan `.open`-nya; ini kesenjangan di mockup yang diselesaikan, bukan fitur baru di luar cakupan.
+- **Drawer geser untuk sidebar dasbor di layar sempit (hamburger + overlay) ditambahkan** — tidak disebut di referensi manapun, dirancang untuk memenuhi syarat responsif 360–1440px pada chrome bersama yang dipakai semua layar dasbor.
+
+## Model data
+
+- **`Service` tidak punya field harga sama sekali** di tipe TypeScript-nya — "harga layanan default tersembunyi" ditegakkan secara struktural (tidak ada apa pun untuk dirender), bukan lewat flag UI yang bisa dibalik. Konsekuensinya: toggle "Tampilkan harga" di editor Konten Layanan bersifat dekoratif/tidak aktif secara desain, bukan bug.
+- **`AuditPayload` adalah union diskriminasi tertutup tanpa field teks bebas** — menjadikan "log audit tidak memuat nama atau nomor pasien" jaminan struktural, bukan konvensi yang bisa dilanggar developer lain secara tidak sengaja.
+- **Ekspor CSV memakai tipe baris yang secara struktur tidak memiliki field nama/nomor** pasien — jaminan waktu-kompilasi, bukan filter kolom saat runtime.
+- **`AppointmentSource` diperluas** menjadi `online | gbp | instagram | lainnya` (bukan cuma `online`) agar cocok dengan breakdown "Sumber janji" yang memang ditampilkan di halaman Laporan pada referensi desain.
+- **`Doctor.branchIds` tidak pernah disimpan** — selalu diturunkan dari `doctor.schedule`, mencegah data dokter dan cabang saling tidak sinkron.
+- **Dampak cuti dokter (`LeaveImpact`) selalu dihitung saat dibaca**, tidak pernah disimpan — jumlah slot tertutup/janji terdampak bisa berubah seiring data lain berubah, jadi menyimpannya akan jadi sumber data basi.
+- **Fakta operasional statis (Branch/Service/Doctor) dipisah dari salinan pemasaran yang bisa diedit (`ContentItem`)** — setiap entitas disemai dengan `ContentItem` dasar yang sudah berstatus "Tayang" agar situs publik tidak pernah terlihat kosong sebelum dasbor konten disentuh. Pratinjau "Simpan draf" pada item yang sudah tayang akan sungguhan mengembalikan field status tunggalnya ke "Draf" — sederhana disengaja, bukan versi draft/live paralel seperti CMS sungguhan.
+- **"Satu lokasi" (`ClinicSettings.hasMultipleBranches`) dan visibilitas per-cabang (`Branch.isVisible`) adalah dua saklar independen** — mematikan satu tidak menghapus data cabang lain; keduanya bisa dibalik kapan saja tanpa kehilangan data.
+- **Hero Beranda ("N cabang") membaca `useVisibleBranches()`**, bukan jumlah total cabang — diperbaiki di potongan ini setelah saklar visibilitas cabang menjadi fitur sungguhan, supaya klaim publik selalu cocok dengan yang benar-benar bisa dipesan. Saat "Satu lokasi" aktif, statistik "cabang" disembunyikan seluruhnya alih-alih menampilkan "0 cabang" yang membingungkan.
+- **Spesialisasi dokter ("Bidang") di editor Konten Profil dokter bersifat baca-saja** dengan tautan silang ke halaman Dokter & cuti, bukan field yang independen bisa diedit — menghindari dua sumber kebenaran untuk data yang sudah hidup di `doctor.schedule`.
+- **Kuota slot (`SlotSettings.defaultQuotaPerSlot`) menentukan penuh/tidaknya slot** — satu janji tidak lagi otomatis membuat slot penuh; slot penuh ketika jumlah janji mencapai kuota. Mengubah kuota di dasbor Jadwal & slot langsung memengaruhi halaman reservasi publik.
+- **Klik-sel untuk membuka/menutup slot satu per satu** (tersirat keterangan referensi "Klik sel untuk menutup...") **sengaja tidak dibangun** — kartu pengaturan kuota/durasi adalah permukaan interaktif sungguhan sebagai gantinya; keterangan di UI ditulis ulang agar tidak menjanjikan interaksi yang tidak ada.
+- **Kehadiran per-dokter di Laporan hanya dihitung saat persis satu dokter menutupi cabang/hari tertentu** (karena `Appointment` sengaja tidak punya field `doctorId`) — sebagian janji tetap tidak teratribusi dokter tertentu, ini pilihan desain, bukan bug.
+
+## Konten lainnya
+
+- **Nama kota fiksi "Mahardika"** menggantikan placeholder `[Kota]` yang literal di alamat cabang pada referensi desain — dipilih agar jelas fiktif, bukan nama kota sungguhan.
+- **Masa retensi persetujuan reservasi memakai "12 bulan"** — referensi meninggalkan `[12]` sebagai placeholder berkurung, tapi 12 sudah jadi contoh angka konkret yang ditampilkan, jadi diadopsi sebagai nilai asli, bukan ditebak ulang.
+- **Grafik "Janji per minggu" di Laporan hanya menampilkan satu minggu berisi data** karena seluruh data contoh berpusat di sekitar "hari ini" (dihitung dari jam sistem) — ini data asli, bukan rekayasa; minggu-minggu historis sengaja tidak diisi data palsu hanya demi membuat grafik terlihat penuh.
+
+## Alur login & pemilih peran
+
+- **Halaman Masuk (per referensi: pilih peran cepat, email/password terisi, OTP untuk peran ber-MFA, langkah sukses) adalah pintu masuk**, yang mengatur peran/cabang aktif ke store. **Dasbor juga menyimpan switcher peran+cabang permanen di sidebar** (mengganti pill statis read-only di referensi dengan dropdown sungguhan) agar peran bisa diganti instan tanpa logout ulang. Ini merealisasikan spec baris 62 ("Pemilih peran ... di dasbor") sebagai mekanisme utama, sementara halaman login adalah kebutuhan terpisah di baris 63 — keduanya ada dan berfungsi, tidak saling menggantikan.

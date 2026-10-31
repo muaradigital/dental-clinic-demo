@@ -37,9 +37,9 @@ export function Beranda() {
     <>
       {banner && <AnnouncementBanner announcement={banner} />}
 
-      <section className="relative overflow-hidden px-5 pb-16 pt-6 md:px-10">
+      <section className="relative flex min-h-[calc(100vh-6rem)] items-center overflow-hidden px-5 py-10 md:px-10">
         <HeroBlobs />
-        <div className="relative mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+        <div className="relative mx-auto grid w-full max-w-[1200px] gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div>
             <span className="eyebrow mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-teal">
               {hero.eyebrow}

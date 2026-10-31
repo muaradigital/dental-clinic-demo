@@ -3,7 +3,7 @@ import { AnnouncementBanner } from '@/components/public/AnnouncementBanner'
 import { BranchCard } from '@/components/public/BranchCard'
 import { CtaBanner } from '@/components/public/CtaBanner'
 import { DoctorCard } from '@/components/public/DoctorCard'
-import { HeroArt, HeroBlobs } from '@/components/public/HeroDecor'
+import { HeroArt, HeroBlobs, HeroScrollCue } from '@/components/public/HeroDecor'
 import { Icon } from '@/components/public/icons'
 import { ServiceCard } from '@/components/public/ServiceCard'
 import { VisitStepCard } from '@/components/public/VisitStepCard'
@@ -83,6 +83,7 @@ export function Beranda() {
           </div>
           <HeroArt />
         </div>
+        <HeroScrollCue />
       </section>
 
       {visibleBranches.length > 0 && (

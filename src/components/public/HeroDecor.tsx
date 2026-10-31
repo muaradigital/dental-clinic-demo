@@ -32,6 +32,27 @@ export function HeroBlobs() {
   )
 }
 
+/** Bottom-center "Scroll" cue, ported from the mockup — hidden under ~900px since the
+ * stacked mobile hero has nothing useful directly below the fold to cue toward. */
+export function HeroScrollCue() {
+  return (
+    <button
+      type="button"
+      onClick={() => window.scrollTo({ top: window.innerHeight - 20, behavior: 'smooth' })}
+      className="absolute bottom-[22px] left-1/2 z-[2] hidden -translate-x-1/2 flex-col items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted min-[901px]:flex"
+      aria-label="Gulir ke bagian berikutnya"
+    >
+      <span className="relative h-9 w-[22px] rounded-full border-[1.5px] border-teal">
+        <span
+          className="absolute left-1/2 top-[6px] h-[7px] w-[3px] -translate-x-1/2 rounded-full bg-teal-bright"
+          style={{ animation: 'hero-wheel 1.8s infinite' }}
+        />
+      </span>
+      Scroll
+    </button>
+  )
+}
+
 export function HeroArt() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[380px]" aria-hidden>

@@ -19,21 +19,33 @@ export interface AvatarProps {
   seed: string
   size?: 'sm' | 'md' | 'lg'
   className?: string
+  /** Slowly rotating dashed ring, ported from the mockup's `.avatar::after` — opt-in
+   * since it's only meant for the public marketing doctor card, not denser dashboard
+   * avatar usages (schedule tables, reviewer cards, content editors). */
+  ring?: boolean
 }
 
-export function Avatar({ initials, seed, size = 'md', className }: AvatarProps) {
+export function Avatar({ initials, seed, size = 'md', className, ring }: AvatarProps) {
   const gradient = GRADIENTS[hashToIndex(seed, GRADIENTS.length)]
   return (
-    <span
-      className={cn(
-        'inline-flex items-center justify-center rounded-full font-display font-medium text-white',
-        SIZE_CLASSES[size],
-        className,
+    <span className={cn('relative inline-flex', className)}>
+      {ring && (
+        <span
+          className="absolute -inset-[7px] rounded-full border-[1.5px] border-dashed"
+          style={{ borderColor: 'rgba(15,118,110,.4)', animation: 'hero-spin 20s linear infinite' }}
+          aria-hidden
+        />
       )}
-      style={{ background: gradient }}
-      aria-hidden
-    >
-      {initials}
+      <span
+        className={cn(
+          'inline-flex items-center justify-center rounded-full font-display font-medium text-white',
+          SIZE_CLASSES[size],
+        )}
+        style={{ background: gradient }}
+        aria-hidden
+      >
+        {initials}
+      </span>
     </span>
   )
 }

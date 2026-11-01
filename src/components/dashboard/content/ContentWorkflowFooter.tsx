@@ -45,7 +45,7 @@ export function ContentWorkflowFooter({
   }
 
   function handlePreview() {
-    navigate(`/dasbor/konten/pratinjau/${item.id}`)
+    navigate(`/dashboard/content/pratinjau/${item.id}`)
   }
 
   return (

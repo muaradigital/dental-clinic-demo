@@ -39,7 +39,7 @@ export function PratinjauQueue() {
           {items.map((item) => (
             <li key={item.id} className="border-t border-[#efece3] first:border-t-0">
               <Link
-                to={`/dasbor/konten/pratinjau/${item.id}`}
+                to={`/dashboard/content/pratinjau/${item.id}`}
                 className="flex items-center justify-between gap-3 px-5 py-4 hover:bg-mint-3"
               >
                 <span className="min-w-0">

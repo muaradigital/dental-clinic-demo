@@ -1,19 +1,19 @@
 import type { ContentNavKey, OperationalNavKey } from '@/types'
 
 export const OPERATIONAL_NAV_ITEMS: { key: OperationalNavKey; label: string; to: string }[] = [
-  { key: 'janji', label: 'Janji hari ini', to: '/dasbor/janji' },
-  { key: 'jadwal', label: 'Jadwal & slot', to: '/dasbor/jadwal' },
-  { key: 'dokter-cuti', label: 'Dokter & cuti', to: '/dasbor/dokter-cuti' },
-  { key: 'pengingat', label: 'Pengingat', to: '/dasbor/pengingat' },
-  { key: 'ulasan', label: 'Ulasan Google', to: '/dasbor/ulasan' },
-  { key: 'laporan', label: 'Laporan', to: '/dasbor/laporan' },
-  { key: 'pengguna', label: 'Pengguna & log audit', to: '/dasbor/pengguna' },
+  { key: 'janji', label: 'Janji', to: '/dashboard/janji' },
+  { key: 'jadwal', label: 'Jadwal & slot', to: '/dashboard/jadwal' },
+  { key: 'dokter-cuti', label: 'Dokter & cuti', to: '/dashboard/dokter-cuti' },
+  { key: 'pengingat', label: 'Pengingat', to: '/dashboard/pengingat' },
+  { key: 'ulasan', label: 'Ulasan Google', to: '/dashboard/ulasan' },
+  { key: 'laporan', label: 'Laporan', to: '/dashboard/laporan' },
+  { key: 'pengguna', label: 'Pengguna & keamanan', to: '/dashboard/pengguna' },
 ]
 
 export const CONTENT_NAV_ITEMS: { key: ContentNavKey; label: string; to: string }[] = [
-  { key: 'layanan', label: 'Layanan', to: '/dasbor/konten/layanan' },
-  { key: 'cabang', label: 'Cabang', to: '/dasbor/konten/cabang' },
-  { key: 'dokter', label: 'Profil dokter', to: '/dasbor/konten/dokter' },
-  { key: 'pengumuman', label: 'Pengumuman & artikel', to: '/dasbor/konten/pengumuman' },
-  { key: 'pratinjau', label: 'Pratinjau & tinjauan', to: '/dasbor/konten/pratinjau' },
+  { key: 'layanan', label: 'Layanan', to: '/dashboard/content/layanan' },
+  { key: 'cabang', label: 'Cabang', to: '/dashboard/content/cabang' },
+  { key: 'dokter', label: 'Profil dokter', to: '/dashboard/content/dokter' },
+  { key: 'pengumuman', label: 'Pengumuman & artikel', to: '/dashboard/content/pengumuman' },
+  { key: 'pratinjau', label: 'Antrean tinjauan', to: '/dashboard/content/pratinjau' },
 ]

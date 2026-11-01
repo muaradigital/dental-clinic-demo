@@ -107,7 +107,7 @@ function DokterEditor({
         <span>
           <b>Hari praktik</b> tersinkron dari Dokter &amp; cuti.
         </span>
-        <a href="/dasbor/dokter-cuti" className="text-[12.5px] font-semibold text-teal">
+        <a href="/dashboard/dokter-cuti" className="text-[12.5px] font-semibold text-teal">
           Ubah di Dokter &amp; cuti →
         </a>
       </div>

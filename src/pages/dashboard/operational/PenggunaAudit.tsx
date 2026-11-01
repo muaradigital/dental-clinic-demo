@@ -41,7 +41,7 @@ export function PenggunaAudit() {
 
   function handleResetDemo() {
     resetDemoData()
-    navigate('/masuk', { replace: true })
+    navigate('/login', { replace: true })
   }
 
   const filteredLog = filter === 'Semua' ? auditLog : auditLog.filter((e) => AUDIT_CATEGORY[e.actionType] === filter)

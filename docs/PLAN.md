@@ -39,20 +39,20 @@ Mockup adalah SPA hash-router vanilla JS. Satu hook `useReveal` akan membungkus 
 | Halaman cabang | `/cabang/:slug` (+ `/cabang` index ditambahkan — nav "Cabang" butuh halaman tujuan) | Publik |
 | Reservasi online | `/reservasi` | Publik |
 | *(tanpa referensi desain — diporting dari mockup)* | `/layanan`, `/dokter`, `/tentang`, `/privasi` | Publik |
-| Masuk panel (login) | `/masuk` | Auth (tanpa nav) |
-| Dasbor resepsionis | `/dasbor/janji` | Dasbor (operasional) |
-| Dasbor Jadwal & slot | `/dasbor/jadwal` | Dasbor (operasional) |
-| Dasbor Dokter & cuti | `/dasbor/dokter-cuti` | Dasbor (operasional) |
-| Dasbor Pengingat | `/dasbor/pengingat` | Dasbor (operasional) |
-| Dasbor Ulasan Google | `/dasbor/ulasan` | Dasbor (operasional) |
-| Dasbor Laporan | `/dasbor/laporan` | Dasbor (operasional) |
-| Dasbor Pengguna & log audit | `/dasbor/pengguna` | Dasbor (operasional) |
-| Konten Layanan/Cabang/Profil dokter/Pengumuman | `/dasbor/konten/{layanan,cabang,dokter,pengumuman}` | Dasbor (konten) |
-| Konten Pratinjau & tinjauan | `/dasbor/konten/pratinjau/:contentId` | Dasbor, chromeless (tanpa sidebar, sesuai referensi) |
+| Masuk panel (login) | `/login` | Auth (tanpa nav) |
+| Dasbor resepsionis | `/dashboard/janji` | Dasbor (operasional) |
+| Dasbor Jadwal & slot | `/dashboard/jadwal` | Dasbor (operasional) |
+| Dasbor Dokter & cuti | `/dashboard/dokter-cuti` | Dasbor (operasional) |
+| Dasbor Pengingat | `/dashboard/pengingat` | Dasbor (operasional) |
+| Dasbor Ulasan Google | `/dashboard/ulasan` | Dasbor (operasional) |
+| Dasbor Laporan | `/dashboard/laporan` | Dasbor (operasional) |
+| Dasbor Pengguna & keamanan | `/dashboard/pengguna` | Dasbor (operasional) |
+| Konten Layanan/Cabang/Profil dokter/Pengumuman | `/dashboard/content/{layanan,cabang,dokter,pengumuman}` | Dasbor (konten) |
+| Konten Antrean tinjauan | `/dashboard/content/pratinjau/:contentId` | Dasbor, chromeless (tanpa sidebar, sesuai referensi) |
 
 Tidak menambahkan `/syarat` (terms of use) — ada di mockup lama tapi di luar daftar halaman eksplisit spec.
 
-Semua `/dasbor/*` dibungkus guard `RequireRole` yang digerakkan oleh satu objek `ROLE_CONFIG`, supaya Sidebar, route guard, dan tabel hak akses di halaman Pengguna tidak pernah berbeda satu sama lain.
+Semua `/dashboard/*` dibungkus guard `RequireRole` yang digerakkan oleh satu objek `ROLE_CONFIG`, supaya Sidebar, route guard, dan tabel hak akses di halaman Pengguna tidak pernah berbeda satu sama lain.
 
 ## 3. Token desain (dari design export, bukan hex berulang di komponen)
 
@@ -98,10 +98,10 @@ src/
 
 | Peran | Lingkup cabang | 2FA | Landing |
 |---|---|---|---|
-| Pemilik | semua (switcher aktif) | ya | `/dasbor/janji` |
-| Admin cabang | terkunci ke cabang sendiri | tidak | `/dasbor/janji` |
-| Resepsionis | terkunci ke cabang sendiri | tidak | `/dasbor/janji` |
-| Peninjau (dokter) | semua (switcher aktif) | ya | `/dasbor/konten/pratinjau` |
+| Pemilik | semua (switcher aktif) | ya | `/dashboard/janji` |
+| Admin cabang | terkunci ke cabang sendiri | tidak | `/dashboard/janji` |
+| Resepsionis | terkunci ke cabang sendiri | tidak | `/dashboard/janji` |
+| Peninjau (dokter) | semua (switcher aktif) | ya | `/dashboard/content/pratinjau` |
 
 Login (per referensi: pilih peran cepat, email/password terisi, OTP untuk peran ber-MFA, langkah sukses) mengatur peran/cabang aktif ke store. Dasbor juga menyimpan switcher peran+cabang permanen di sidebar (mengganti pill statis read-only di referensi dengan dropdown sungguhan) agar peran bisa diganti instan tanpa logout ulang — ini realisasi dari "Pemilih peran ... di dasbor" pada spec baris 62; halaman login adalah pintu masuk yang diminta terpisah pada baris 63.
 

@@ -10,7 +10,7 @@ export interface RequireRoleProps {
 }
 
 /**
- * Two-tier guard: unauthenticated users bounce to /masuk; authenticated
+ * Two-tier guard: unauthenticated users bounce to /login; authenticated
  * users whose role doesn't include the given nav key bounce to their own
  * default landing route. Driven entirely by ROLE_CONFIG so this can never
  * disagree with what the Sidebar shows or the Pengguna page's matrix claims.
@@ -21,7 +21,7 @@ export function RequireRole({ children, nav }: RequireRoleProps) {
   const location = useLocation()
 
   if (!isAuthenticated || !activeRole) {
-    return <Navigate to="/masuk" state={{ from: location }} replace />
+    return <Navigate to="/login" state={{ from: location }} replace />
   }
 
   if (nav) {

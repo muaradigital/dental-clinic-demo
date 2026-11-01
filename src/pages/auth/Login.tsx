@@ -11,8 +11,8 @@ import { useDemoStore } from '@/store/useDemoStore'
 import type { RoleId } from '@/types'
 
 const ROUTE_LABELS: Record<string, string> = {
-  '/dasbor/janji': 'Janji hari ini',
-  '/dasbor/konten/pratinjau': 'Antrean tinjauan konten',
+  '/dashboard/janji': 'Janji hari ini',
+  '/dashboard/content/pratinjau': 'Antrean tinjauan konten',
 }
 
 const VALUE_PROPS = [

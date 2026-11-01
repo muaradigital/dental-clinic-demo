@@ -24,10 +24,10 @@ const TYPE_EYEBROW: Record<string, string> = {
 }
 
 const EDITOR_ROUTE: Record<string, string> = {
-  layanan: '/dasbor/konten/layanan',
-  cabang: '/dasbor/konten/cabang',
-  dokter: '/dasbor/konten/dokter',
-  pengumuman: '/dasbor/konten/pengumuman',
+  layanan: '/dashboard/content/layanan',
+  cabang: '/dashboard/content/cabang',
+  dokter: '/dashboard/content/dokter',
+  pengumuman: '/dashboard/content/pengumuman',
 }
 
 export function KontenPratinjau() {

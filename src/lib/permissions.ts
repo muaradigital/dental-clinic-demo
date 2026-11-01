@@ -12,7 +12,7 @@ export const ROLE_CONFIG: Record<RoleId, RoleConfig> = {
     label: 'Pemilik',
     branchScope: 'all',
     mfaRequired: true,
-    defaultLandingRoute: '/dasbor/janji',
+    defaultLandingRoute: '/dashboard/janji',
     dashboardNav: {
       operational: ['janji', 'jadwal', 'dokter-cuti', 'pengingat', 'ulasan', 'laporan', 'pengguna'],
       content: ['layanan', 'cabang', 'dokter', 'pengumuman', 'pratinjau'],
@@ -23,7 +23,7 @@ export const ROLE_CONFIG: Record<RoleId, RoleConfig> = {
     label: 'Admin cabang',
     branchScope: 'locked',
     mfaRequired: false,
-    defaultLandingRoute: '/dasbor/janji',
+    defaultLandingRoute: '/dashboard/janji',
     dashboardNav: {
       operational: ['janji', 'jadwal', 'dokter-cuti', 'pengingat', 'ulasan'],
       content: [],
@@ -34,7 +34,7 @@ export const ROLE_CONFIG: Record<RoleId, RoleConfig> = {
     label: 'Resepsionis',
     branchScope: 'locked',
     mfaRequired: false,
-    defaultLandingRoute: '/dasbor/janji',
+    defaultLandingRoute: '/dashboard/janji',
     dashboardNav: {
       operational: ['janji', 'jadwal', 'pengingat'],
       content: [],
@@ -45,7 +45,7 @@ export const ROLE_CONFIG: Record<RoleId, RoleConfig> = {
     label: 'Peninjau (dokter)',
     branchScope: 'all',
     mfaRequired: true,
-    defaultLandingRoute: '/dasbor/konten/pratinjau',
+    defaultLandingRoute: '/dashboard/content/pratinjau',
     dashboardNav: {
       operational: [],
       content: ['layanan', 'cabang', 'dokter', 'pengumuman', 'pratinjau'],

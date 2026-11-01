@@ -162,7 +162,7 @@ function BranchEditor({
         <span>
           <b>Jam praktik</b> tersinkron dari Jadwal &amp; slot.
         </span>
-        <a href="/dasbor/jadwal" className="text-[12.5px] font-semibold text-teal">
+        <a href="/dashboard/jadwal" className="text-[12.5px] font-semibold text-teal">
           Ubah di Jadwal →
         </a>
       </div>

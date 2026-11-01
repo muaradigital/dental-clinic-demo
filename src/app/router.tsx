@@ -49,10 +49,10 @@ export const router = createBrowserRouter([
       },
       {
         element: <AuthLayout />,
-        children: [{ path: '/masuk', element: <Login /> }],
+        children: [{ path: '/login', element: <Login /> }],
       },
       {
-        path: '/dasbor',
+        path: '/dashboard',
         element: (
           <RequireRole>
             <DashboardLayout mode="operational" />
@@ -119,14 +119,14 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: '/dasbor/konten',
+        path: '/dashboard/content',
         element: (
           <RequireRole>
             <DashboardLayout mode="content" />
           </RequireRole>
         ),
         children: [
-          { index: true, element: <Navigate to="/dasbor/konten/layanan" replace /> },
+          { index: true, element: <Navigate to="/dashboard/content/layanan" replace /> },
           {
             path: 'layanan',
             element: (
@@ -170,7 +170,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: '/dasbor/konten/pratinjau/:contentId',
+        path: '/dashboard/content/pratinjau/:contentId',
         element: (
           <RequireRole nav={{ mode: 'content', key: 'pratinjau' }}>
             <DashboardLayout mode="content" chromeless />

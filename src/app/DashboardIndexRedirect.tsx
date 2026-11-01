@@ -4,6 +4,6 @@ import { useDemoStore } from '@/store/useDemoStore'
 
 export function DashboardIndexRedirect() {
   const activeRole = useDemoStore((s) => s.activeRole)
-  if (!activeRole) return <Navigate to="/masuk" replace />
+  if (!activeRole) return <Navigate to="/login" replace />
   return <Navigate to={ROLE_CONFIG[activeRole].defaultLandingRoute} replace />
 }

@@ -65,13 +65,13 @@ export function Sidebar({ mode, isOpen, onClose }: SidebarProps) {
         </ul>
 
         {mode === 'content' && canSwitchToOperational && (
-          <NavLink to="/dasbor/janji" className="mt-4 inline-block text-[13px] text-on-dark-muted hover:text-white">
+          <NavLink to="/dashboard/janji" className="mt-4 inline-block text-[13px] text-on-dark-muted hover:text-white">
             ← Panel operasional
           </NavLink>
         )}
         {mode === 'operational' && canSwitchToContent && (
           <NavLink
-            to="/dasbor/konten/layanan"
+            to="/dashboard/content/layanan"
             className="mt-4 inline-block text-[13px] text-on-dark-muted hover:text-white"
           >
             Konten website →

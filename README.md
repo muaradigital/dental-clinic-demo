@@ -17,7 +17,7 @@ npm run lint      # oxlint
 ```
 src/
   app/            router.tsx (semua route), RequireRole.tsx (guard peran), ScrollRestoration.tsx
-  layouts/        PublicLayout, AuthLayout, DashboardLayout (mode operasional/konten, bisa chromeless)
+  layouts/        PublicLayout, AuthLayout, DashboardLayout (sidebar gabungan, bisa chromeless)
   pages/          satu file per layar: public/, auth/, dashboard/operational/, dashboard/content/
   components/
     primitives/   Button, StatusChip, Card, Stepper, Toggle, Tabs, Photo, Avatar, Section, NoticeBanner, TextField
@@ -49,6 +49,14 @@ Komponen **tidak pernah** mengimpor `src/data/seed/*` secara langsung — semua 
 Pengecualian: teks statis murni (salinan pemasaran di `data/seed/homepage.ts` dan `data/seed/staticPages.ts`) diimpor langsung oleh halaman karena tidak difilter/diubah/di-overlay sesi — ini juga titik wajar untuk diganti dengan CMS/API konten nanti.
 
 State sesi (peran aktif, cabang aktif, reservasi yang dibuat, status konten, log audit, dst.) hidup di `src/store/useDemoStore.ts`, dipersist ke `localStorage`. Tombol "Reset data demo" (halaman Pengguna & log audit, khusus Pemilik) mengembalikan semua ke `src/data/seed/*` dan menghapus `localStorage`.
+
+## Deploy
+
+Build statis (`npm run build` → `dist/`) bisa di-deploy ke host statis mana pun. Karena ini SPA dengan client-side routing (React Router), host harus dikonfigurasi supaya semua path (mis. `/dashboard/janji`) jatuh ke `index.html` alih-alih 404 dari server — baru setelah itu React Router yang menentukan halaman mana yang ditampilkan. Tanpa ini, route apa pun selain `/` akan 404 saat diakses langsung (link dibagikan, refresh halaman, dsb.), meski navigasi lewat klik di dalam aplikasi tetap berfungsi normal.
+
+- **Vercel**: sudah ditangani oleh `vercel.json` di root proyek (rewrite semua path ke `/index.html`).
+- **Netlify**: tambahkan file `public/_redirects` berisi `/* /index.html 200`.
+- **Cloudflare Pages**: sama seperti Netlify, `public/_redirects` berisi `/* /index.html 200`.
 
 ## Catatan kepatuhan
 

@@ -35,9 +35,12 @@ export function MobileMenu({ isOpen, links, onNavigate }: MobileMenuProps) {
           </li>
         ))}
       </ul>
-      <div className="mt-2 border-t border-border pt-2">
+      <div className="mt-2 flex flex-col gap-2 border-t border-border pt-2">
         <Button to="/reservasi" size="sm" fullWidth onClick={onNavigate}>
           Reservasi
+        </Button>
+        <Button to="/login" variant="outline-light" size="sm" fullWidth onClick={onNavigate}>
+          Demo dashboard
         </Button>
       </div>
     </nav>

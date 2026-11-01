@@ -52,7 +52,10 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-2 md:flex">
+            <Button to="/login" variant="outline-light" size="sm">
+              Demo dashboard
+            </Button>
             <Button to="/reservasi" size="sm">
               Reservasi
             </Button>

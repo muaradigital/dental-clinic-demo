@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: (
           <RequireRole>
-            <DashboardLayout mode="operational" />
+            <DashboardLayout />
           </RequireRole>
         ),
         children: [
@@ -122,7 +122,7 @@ export const router = createBrowserRouter([
         path: '/dashboard/content',
         element: (
           <RequireRole>
-            <DashboardLayout mode="content" />
+            <DashboardLayout />
           </RequireRole>
         ),
         children: [
@@ -173,7 +173,7 @@ export const router = createBrowserRouter([
         path: '/dashboard/content/pratinjau/:contentId',
         element: (
           <RequireRole nav={{ mode: 'content', key: 'pratinjau' }}>
-            <DashboardLayout mode="content" chromeless />
+            <DashboardLayout chromeless />
           </RequireRole>
         ),
         children: [{ index: true, element: <KontenPratinjau /> }],

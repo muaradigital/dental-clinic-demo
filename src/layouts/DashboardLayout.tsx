@@ -5,11 +5,10 @@ import { Logo } from '@/components/layout/Logo'
 import { cn } from '@/lib/cn'
 
 export interface DashboardLayoutProps {
-  mode: 'operational' | 'content'
   chromeless?: boolean
 }
 
-export function DashboardLayout({ mode, chromeless }: DashboardLayoutProps) {
+export function DashboardLayout({ chromeless }: DashboardLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   if (chromeless) {
@@ -22,7 +21,7 @@ export function DashboardLayout({ mode, chromeless }: DashboardLayoutProps) {
 
   return (
     <div className="flex min-h-screen bg-dash-bg">
-      <Sidebar mode={mode} isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       {isSidebarOpen && (
         <div
